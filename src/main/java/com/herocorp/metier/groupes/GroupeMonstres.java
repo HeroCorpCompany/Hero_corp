@@ -1,5 +1,9 @@
 package com.herocorp.metier.groupes;
 
-public class GroupeMonstres {
+public class GroupeMonstres extends AbstractGroupe {
     
+
+    public GroupeMonstres () {
+        super ();
+    }
 }
