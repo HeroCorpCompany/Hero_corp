@@ -1,7 +1,6 @@
 package com.herocorp.services.metier.acteurs;
 
 import com.herocorp.metier.acteurs.Chasseur;
-import com.herocorp.metier.groupes.GroupeChasseurs;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Guilde;
