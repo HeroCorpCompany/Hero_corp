@@ -29,6 +29,10 @@ public abstract class AbstractActeur {
         return this.classe;
     }
 
+    public void setClasse (Classe newClasse) {
+        this.classe = newClasse;
+    }
+
     public int getForce () {
         return this.classe.getForce();
     }
