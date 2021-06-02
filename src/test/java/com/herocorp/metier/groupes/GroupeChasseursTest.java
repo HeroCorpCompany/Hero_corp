@@ -32,5 +32,7 @@ public class GroupeChasseursTest
         assertEquals(2,resultat);
 
     }
+
+    
 }
 
