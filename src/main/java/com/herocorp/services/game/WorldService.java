@@ -54,4 +54,8 @@ public class WorldService {
     public static boolean tuerChasseur (World world, Chasseur chasseurCible) {
         return world.getListeChasseurs().remove(chasseurCible);
     }
+
+    public static boolean detruireGroupe (World world, GroupeRaid groupeCible) {
+        return world.getListeGroupes().remove(groupeCible);
+    }
 }

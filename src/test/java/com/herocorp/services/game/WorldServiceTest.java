@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
@@ -36,7 +37,89 @@ public class WorldServiceTest
     @Test
     public void testUpdateWorld () {
         // TODO : Générer un monde et le simuler pendant un tour
-        assertTrue(true);
+        assertTrue(false);
+    }
+
+    @Test
+    public void testUpdateChasseurs () {
+        // TODO : Générer des chasseurs et les simuler pendant un tour
+        assertTrue(false);
+    }
+
+    @Test
+    public void testUpdateGroupes () {
+        // TODO : Générer des groupes et les simuler pendant un tour
+        assertTrue(false);
+    }
+
+    @Test
+    public void testUpdateGuildes () {
+        // TODO : Générer des guildes et les simuler pendant un tour
+        assertTrue(false);
+    }
+
+    @Test
+    public void testDetruireDonjon () {
+        // INIT
+        Donjon donjon = new Donjon();
+        ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
+        ArrayList <Donjon> listeDonjons = new ArrayList<>();
+        ArrayList <Guilde> listeGuildes = new ArrayList<>();
+        HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
+        World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
+        world.getListeDonjons().add(donjon);
+        // RES
+        boolean resultat = WorldService.detruireDonjon(world, donjon);
+        // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testDetruireGuilde () {
+        // INIT
+        Guilde guilde = new Guilde();
+        ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
+        ArrayList <Donjon> listeDonjons = new ArrayList<>();
+        ArrayList <Guilde> listeGuildes = new ArrayList<>();
+        HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
+        World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
+        world.getListeGuildes().add(guilde);
+        // RES
+        boolean resultat = WorldService.detruireGuilde(world, guilde);
+        // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testDetruireGroupe () {
+        // INIT
+        GroupeRaid groupe = new GroupeRaid();
+        ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
+        ArrayList <Donjon> listeDonjons = new ArrayList<>();
+        ArrayList <Guilde> listeGuildes = new ArrayList<>();
+        HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
+        World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
+        world.getListeGroupes().add(groupe);
+        // RES
+        boolean resultat = WorldService.detruireGroupe(world, groupe);
+        // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testTuerChasseur () {
+        // INIT
+        Chasseur chasseur = new Chasseur("Souli");
+        ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
+        ArrayList <Donjon> listeDonjons = new ArrayList<>();
+        ArrayList <Guilde> listeGuildes = new ArrayList<>();
+        HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
+        World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
+        world.getListeChasseurs().add(chasseur);
+        // RES
+        boolean resultat = WorldService.tuerChasseur(world, chasseur);
+        // TEST
+        assertTrue(resultat);
     }
 }
 
