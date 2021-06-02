@@ -73,7 +73,7 @@ public class WorldTest
     }
 
     @Test
-    public void testGetListeChasseur () {
+    public void testGetMapLieux () {
         // INIT
         ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
         ArrayList <Donjon> listeDonjons = new ArrayList<>();
@@ -85,5 +85,8 @@ public class WorldTest
         // TEST
         assertEquals(attendu, resultat);
     }
+
+    
+
 }
 

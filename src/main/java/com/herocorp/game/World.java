@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
@@ -14,6 +15,7 @@ public class World {
     private ArrayList <Chasseur> listeChasseurs;
     private ArrayList <Donjon> listeDonjons;
     private ArrayList <Guilde> listeGuildes;
+    private ArrayList <GroupeRaid> listeGroupes = new ArrayList<>();
     private HashMap <String, AbstractLieu> mapLieux;
 
     public World (ArrayList <Chasseur> listeChasseurs, ArrayList <Donjon> listeDonjons, ArrayList <Guilde> listeGuildes, HashMap <String, AbstractLieu> mapLieux) {
@@ -41,6 +43,10 @@ public class World {
 
     public ArrayList <Guilde> getListeGuildes () {
         return this.listeGuildes;
+    }
+
+    public ArrayList <GroupeRaid> getListeGroupes () {
+        return this.listeGroupes;
     }
 
     public HashMap <String, AbstractLieu> getMapLieux () {
