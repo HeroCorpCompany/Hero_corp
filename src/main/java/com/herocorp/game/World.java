@@ -11,13 +11,16 @@ import com.herocorp.metier.lieux.Guilde;
 public class World {
 
     private int temps = 0;
-    private ArrayList <Chasseur> listeChasseurs = new ArrayList <Chasseur> ();
-    private ArrayList <Donjon> listeDonjons = new ArrayList <Donjon> ();
-    private ArrayList <Guilde> listeGuildes = new ArrayList <Guilde> ();
-    private HashMap <String, AbstractLieu> mapLieux = new HashMap <String, AbstractLieu> ();
+    private ArrayList <Chasseur> listeChasseurs;
+    private ArrayList <Donjon> listeDonjons;
+    private ArrayList <Guilde> listeGuildes;
+    private HashMap <String, AbstractLieu> mapLieux;
 
-    public World () {
-        // TODO : Générer les lieux, les stocker dans mapLieux, générer des donjons et la population initiale
+    public World (ArrayList <Chasseur> listeChasseurs, ArrayList <Donjon> listeDonjons, ArrayList <Guilde> listeGuildes, HashMap <String, AbstractLieu> mapLieux) {
+        this.listeChasseurs = listeChasseurs;
+        this.listeDonjons = listeDonjons;
+        this.listeGuildes = listeGuildes;
+        this.mapLieux = mapLieux;
     }
 
     public int getTemps () {
