@@ -13,7 +13,7 @@ public class GuildeService {
         return guilde.removeMembre(chasseur);
     }
 
-    public static void payerSalaires (Guilde guilde, Chasseur chasseur) {
+    public static void payerSalaires (Guilde guilde) {
         int size = guilde.getTaille();
 
         for(int i = 0; i < size; i++){
