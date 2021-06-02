@@ -33,8 +33,9 @@ public class AbstractGroupe {
         // TODO : Ajout l'acteur à la liste
     }
 
-    public void remove (AbstractActeur acteur) {
+    public boolean remove (AbstractActeur acteur) {
         // TODO : Retire l'acteur de la liste
+        return true;
     }
     
 }
