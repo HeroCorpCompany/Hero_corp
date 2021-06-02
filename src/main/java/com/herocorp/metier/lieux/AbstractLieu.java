@@ -1,6 +1,5 @@
 package com.herocorp.metier.lieux;
 
-import com.herocorp.metier.groupes.AbstractGroupe;
 import com.herocorp.tools.Coord;
 
 
@@ -10,7 +9,6 @@ public class AbstractLieu {
     private int id;
     private String nom;
     private Coord coord;
-    private AbstractGroupe habitants;
 
     public AbstractLieu (String nom, Coord coord) {
         this.id = AbstractLieu.dernierId;
@@ -29,9 +27,5 @@ public class AbstractLieu {
 
     public Coord getPosition(){
         return this.coord;
-    }
-
-    public AbstractGroupe getHabitants () {
-        return this.habitants;
     }
 }
