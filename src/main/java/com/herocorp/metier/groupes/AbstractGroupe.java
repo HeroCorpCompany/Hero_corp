@@ -30,11 +30,14 @@ public class AbstractGroupe {
     }
 
     public void add (AbstractActeur newActeur) {
-        // TODO : Ajout l'acteur à la liste
+        this.liste.add(newActeur.getId)
     }
 
     public void remove (AbstractActeur acteur) {
-        // TODO : Retire l'acteur de la liste
+        this.liste.add(new Integer(newActeur.getId))
     }
     
+    public void setPosition (AbstractLieu newLieu){
+        this.position = newLieu
+    }
 }
