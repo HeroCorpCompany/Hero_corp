@@ -29,6 +29,10 @@ public class AbstractGroupe {
         return this.position;
     }
 
+    public AbstractLieu get(Int identifiant) {
+        return this.getListe.get(identifiant);
+    }
+
     public void add (AbstractActeur newActeur) {
         this.liste.add(newActeur.getId)
     }

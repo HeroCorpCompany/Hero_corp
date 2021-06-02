@@ -14,7 +14,7 @@ public class GroupeMonstres extends AbstractGroupe {
           forceTot+= monstre.getForce(); 
         }
         int forceMoy = forceTot/mobs.size();
-        int randomParam = Math.random() * (2 - 0.5)) + 0.5
+        int randomParam = Math.random() * (2 - 0.5) + 0.5
         return forceMoy*randomParam;
     }
 }
