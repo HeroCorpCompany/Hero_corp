@@ -6,14 +6,18 @@ import com.herocorp.metier.lieux.Guilde;
 public class GuildeService {
     
     public static void ajouterChasseur (Guilde guilde, Chasseur chasseur) {
-        // TODO : ajouter le chasseur à la liste des membres
+        guilde.addMembre(chasseur);
     }
 
-    public static void retirerChasseur (Guilde guilde, Chasseur chasseur) {
-        // TODO : retirer le chasseur de la liste des membres
+    public static boolean retirerChasseur (Guilde guilde, Chasseur chasseur) {
+        return guilde.removeMembre(chasseur);
     }
 
     public static void payerSalaires (Guilde guilde, Chasseur chasseur) {
-        // TODO : payer les salaires de tous les membres de la guilde
+        int size = guilde.getTaille();
+
+        for(int i = 0; i < size; i++){
+            guilde.setArgent(guilde.getArgent() - ((Chasseur) guilde.getMembres().getListe().get(i)).getSalaire());
+        }
     }
 }
