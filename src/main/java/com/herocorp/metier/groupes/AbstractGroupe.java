@@ -33,8 +33,8 @@ public class AbstractGroupe {
         this.liste.add(newActeur.getId)
     }
 
-    public void remove (AbstractActeur acteur) {
-        this.liste.add(new Integer(newActeur.getId))
+    public boolean remove (AbstractActeur acteur) {
+        return this.liste.remove(new Integer(newActeur.getId))
     }
     
     public void setPosition (AbstractLieu newLieu){
