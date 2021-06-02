@@ -1,12 +1,10 @@
 package com.herocorp.services.game;
 
-import java.util.ArrayList;
-
-import com.herocorp.metier.groupes.GroupeRaid;
+import com.herocorp.game.World;
 
 public class UpdateGroupes {
 
-    public static void updateGroupes ( ArrayList <GroupeRaid> listeGroupes ) {
+    public static void updateGroupes ( World world ) {
         // TODO : voir arbre groupes
     }
     

@@ -1,12 +1,11 @@
 package com.herocorp.services.game;
 
-import java.util.ArrayList;
+import com.herocorp.game.World;
 
-import com.herocorp.metier.lieux.Guilde;
 
 public class UpdateGuildes {
     
-    public static void updateGuildes ( ArrayList <Guilde> listeGuildes ) {
-        
+    public static void updateGuildes ( World world ) {
+        // TODO : voir arbre guildes
     }
 }

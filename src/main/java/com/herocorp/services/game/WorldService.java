@@ -14,9 +14,9 @@ public class WorldService {
     }
 
     public static void updateWorld (World world) {
-        UpdateChasseurs.updateChasseurs(world.getListeChasseurs());
-        UpdateGroupes.updateGroupes(world.getListeGroupes());;
-        UpdateGuildes.updateGuildes(world.getListeGuildes());
+        UpdateChasseurs.updateChasseurs(world);
+        UpdateGroupes.updateGroupes(world);;
+        UpdateGuildes.updateGuildes(world);
         WorldService.updateTemps(world);
     }
 

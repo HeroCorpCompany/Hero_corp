@@ -1,12 +1,10 @@
 package com.herocorp.services.game;
 
-import java.util.ArrayList;
-
-import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.game.World;
 
 public class UpdateChasseurs {
     
-    public static void updateChasseurs (ArrayList <Chasseur> listeChasseurs) {
+    public static void updateChasseurs (World world) {
         // TODO : voir arbre chasseurs
     }
 }

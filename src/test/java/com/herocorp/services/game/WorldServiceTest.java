@@ -41,24 +41,6 @@ public class WorldServiceTest
     }
 
     @Test
-    public void testUpdateChasseurs () {
-        // TODO : Générer des chasseurs et les simuler pendant un tour
-        assertTrue(false);
-    }
-
-    @Test
-    public void testUpdateGroupes () {
-        // TODO : Générer des groupes et les simuler pendant un tour
-        assertTrue(false);
-    }
-
-    @Test
-    public void testUpdateGuildes () {
-        // TODO : Générer des guildes et les simuler pendant un tour
-        assertTrue(false);
-    }
-
-    @Test
     public void testDetruireDonjon () {
         // INIT
         Donjon donjon = new Donjon();
