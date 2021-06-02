@@ -29,19 +29,19 @@ public class AbstractGroupe {
         return this.position;
     }
 
-    public AbstractLieu get(Int identifiant) {
-        return this.getListe.get(identifiant);
+    public AbstractActeur get(int identifiant) {
+        return this.getListe().get(identifiant);
     }
 
     public void add (AbstractActeur newActeur) {
-        this.liste.add(newActeur.getId)
+        this.liste.add(newActeur);
     }
 
     public boolean remove (AbstractActeur acteur) {
-        return this.liste.remove(new Integer(newActeur.getId))
+        return this.liste.remove(acteur);
     }
     
     public void setPosition (AbstractLieu newLieu){
-        this.position = newLieu
+        this.position = newLieu;
     }
 }

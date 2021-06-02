@@ -1,7 +1,8 @@
 package com.herocorp.metier.groupes;
-package com.herocorp.metier.acteurs;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+
+import com.herocorp.metier.acteurs.Chasseur;
 
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class GroupeChasseursTest
         groupe.add(chasseur2); 
 
         // RES
-        Int resultat = groupe.getTaille(); 
+        int resultat = groupe.getTaille(); 
 
         // TEST 
         assertEquals(2,resultat);

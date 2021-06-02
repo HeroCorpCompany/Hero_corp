@@ -1,6 +1,12 @@
 package com.herocorp.metier.groupes;
-package com.herocorp.metier.acteurs;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Random;
+
+import com.herocorp.metier.acteurs.Monstre;
+import com.herocorp.tools.Classe;
 
 import org.junit.Test;
 
@@ -52,13 +58,15 @@ public class GroupeMonstresTest
 
         Random randommo = new Random(); 
         randommo.setSeed(20);
-        int attendu = 34*Math.random() * (2 - 0.5) + 0.5;
+        double attendu = 34*randommo.nextGaussian();
 
         // RES
-        resultat = groupe1.combatForce(); 
+        double force = groupe1.combatForce(); 
+
+        boolean resultat = attendu == force;
 
         // TEST
-        assertEquals(resultat,attendu)
+        assertTrue(resultat);;
     }
 }
 

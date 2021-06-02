@@ -1,8 +1,11 @@
 package com.herocorp.metier.groupes;
-package com.herocorp.metier.acteurs;
-package com.herocorp.tools.Classe;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.tools.Classe;
 
 import org.junit.Test;
 
@@ -28,8 +31,8 @@ public class GroupeRaidTest
         Chasseur chasseur8 = new Chasseur("Maymay");
         Chasseur chasseur9 = new Chasseur("Bribri");
         Chasseur chasseur10 = new Chasseur("Alexandrie");
-        GroupeRaid groupe1 = new GroupeChasseurs(); 
-        GroupeRaid groupe2 = new GroupeChasseurs(); 
+        GroupeRaid groupe1 = new GroupeRaid(); 
+        GroupeRaid groupe2 = new GroupeRaid(); 
 
         groupe1.add(chasseur1); 
         groupe1.add(chasseur2); 
@@ -52,11 +55,11 @@ public class GroupeRaidTest
         groupe2.add(chasseur7); 
 
         // RES 
-        resultat1 = groupe1.isPlein();
-        resultat2 = groupe2.isPlein();
+        boolean resultat1 = groupe1.isPlein();
+        boolean resultat2 = groupe2.isPlein();
         // TEST 
         assertTrue(resultat1);
-        assertFalse(resultat2)
+        assertFalse(resultat2);
 
     }
 
@@ -71,8 +74,8 @@ public class GroupeRaidTest
         Chasseur chasseur8 = new Chasseur("Maymay");
         Chasseur chasseur9 = new Chasseur("Bribri");
         Chasseur chasseur10 = new Chasseur("Alexandrie");
-        GroupeRaid groupe1 = new GroupeChasseurs(); 
-        GroupeRaid groupe2 = new GroupeChasseurs(); 
+        GroupeRaid groupe1 = new GroupeRaid(); 
+        GroupeRaid groupe2 = new GroupeRaid(); 
 
         chasseur1.setClasse(Classe.A); //4
         chasseur2.setClasse(Classe.B); //3
@@ -99,10 +102,10 @@ public class GroupeRaidTest
         int attendu = 34;
 
         // RES
-        resultat = groupe1.combatForce(); 
+        int resultat = groupe1.combatForce(); 
 
         // TEST
-        assertEquals(resultat,attendu)
+        assertEquals(resultat,attendu);
     }
 }
 
