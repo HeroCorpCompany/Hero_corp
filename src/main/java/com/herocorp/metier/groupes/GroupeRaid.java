@@ -7,7 +7,18 @@ public class GroupeRaid extends GroupeChasseurs {
     }
 
     public boolean isPlein () {
-        // TODO : Renvoie vrai si la taille du groupe est de 10, faux sinon
-        return false;
+        size = this.liste.size(); 
+        return (size.equals(10));
+    }
+
+    public int combatForce () {
+        // TODO : Récuperer la force des membre du groupe et la renvoyer, peut se faire aussi dans la classe abstract groupe si même meca pour mobs et chasseurs
+        chasseurs = this.getListe();
+        int forceTot= 0;
+        for(Chasseur chasseur: chasseurs){
+          forceTot+= chasseur.getForce(); 
+        }
+        int forceMoy = forceTot/chasseurs.size();
+        return forceMoy;
     }
 }
