@@ -44,18 +44,18 @@ public class WorldService {
     }
 
     public static boolean detruireDonjon (World world, Donjon donjonCible) {
-        return world.getListeDonjons().remove(donjonCible);
+        return world.supprimerDonjon(donjonCible);
     }
 
     public static boolean detruireGuilde (World world, Guilde guildeCible) {
-        return world.getListeGuildes().remove(guildeCible);
+        return world.supprimerGuilde(guildeCible);
     }
 
     public static boolean tuerChasseur (World world, Chasseur chasseurCible) {
-        return world.getListeChasseurs().remove(chasseurCible);
+        return world.supprimerChasseur(chasseurCible);
     }
 
     public static boolean detruireGroupe (World world, GroupeRaid groupeCible) {
-        return world.getListeGroupes().remove(groupeCible);
+        return world.supprimerGroupe(groupeCible);
     }
 }

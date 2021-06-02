@@ -37,20 +37,60 @@ public class World {
         return this.listeChasseurs;
     }
 
+    public void ajouterChasseur (Chasseur chasseur) {
+        this.listeChasseurs.add(chasseur);
+    }
+
+    public boolean supprimerChasseur (Chasseur chasseur) {
+        return this.listeChasseurs.remove(chasseur);
+    }
+
     public ArrayList <Donjon> getListeDonjons () {
         return this.listeDonjons;
+    }
+
+    public void ajouterDonjon (Donjon donjon) {
+        this.listeDonjons.add(donjon);
+    }
+
+    public boolean supprimerDonjon (Donjon donjon) {
+        return this.listeDonjons.remove(donjon);
     }
 
     public ArrayList <Guilde> getListeGuildes () {
         return this.listeGuildes;
     }
 
+    public void ajouterGuilde (Guilde guilde) {
+        this.listeGuildes.add(guilde);
+    }
+
+    public boolean supprimerGuilde (Guilde guilde) {
+        return this.listeGuildes.remove(guilde);
+    }
+
     public ArrayList <GroupeRaid> getListeGroupes () {
         return this.listeGroupes;
     }
 
+    public void ajouterGroupe (GroupeRaid groupe) {
+        this.listeGroupes.add(groupe);
+    }
+
+    public boolean supprimerGroupe (GroupeRaid groupe) {
+        return this.listeGroupes.remove(groupe);
+    }
+
     public HashMap <String, AbstractLieu> getMapLieux () {
         return this.mapLieux;
+    }
+
+    public void ajouterLieu (String nom, AbstractLieu lieu) {
+        this.mapLieux.put(nom, lieu);
+    }
+
+    public AbstractLieu getLieu (String nom) {
+        return this.mapLieux.get(nom);
     }
     
 }
