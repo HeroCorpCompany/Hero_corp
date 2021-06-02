@@ -14,29 +14,10 @@ public class WorldService {
     }
 
     public static void updateWorld (World world) {
-        WorldService.updateChasseurs(world);
-        WorldService.updateGroupes(world);
-        WorldService.updateGuildes(world);
+        UpdateChasseurs.updateChasseurs(world.getListeChasseurs());
+        UpdateGroupes.updateGroupes(world.getListeGroupes());;
+        UpdateGuildes.updateGuildes(world.getListeGuildes());
         WorldService.updateTemps(world);
-    }
-
-    public static void updateChasseurs (World world) {
-        // TODO : update de tous les chasseurs du monde : Voir arbre de décision des chasseurs
-        for (Chasseur chasseur : world.getListeChasseurs()) {
-
-        }
-    }
-
-    public static void updateGroupes (World world) {
-        // TODO : update de tous les groupes de raid : Voir arbre de décision des groupes
-        // TODO : ajouter la gestion et la sauvegarde des groupes dans la classe World
-    }
-
-    public static void updateGuildes (World world) {
-        // TODO : update de toutes les guildes : Voir arbre de décision des guildes
-        for (Guilde guilde : world.getListeGuildes()) {
-
-        }
     }
 
     public static void genererDonjons (World world) {
