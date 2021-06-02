@@ -21,18 +21,18 @@ public class GroupeMonstresTest
     @Test
     public void testCombatForce()
     {
-        Monstre Monstre1 = new Monstre("Pouf");
-        Monstre Monstre2 = new Monstre("Pif");
-        Monstre Monstre3 = new Monstre("Souli");
-        Monstre Monstre4 = new Monstre("Bipou");
-        Monstre Monstre5 = new Monstre("TotoroDepressif");
-        Monstre Monstre6 = new Monstre("Po");
-        Monstre Monstre7 = new Monstre("Bou");
-        Monstre Monstre8 = new Monstre("Maymay");
-        Monstre Monstre9 = new Monstre("Bribri");
-        Monstre Monstre10 = new Monstre("Alexandrie");
-        GroupeMonstres groupe1 = new GroupeMonstres(); 
-        GroupeMonstres groupe2 = new GroupeMonstres(); 
+        GroupeMonstres groupe = new GroupeMonstres();
+        Monstre Monstre1 = new Monstre("Pouf", Classe.A, groupe);
+        Monstre Monstre2 = new Monstre("Pif", Classe.A, groupe);
+        Monstre Monstre3 = new Monstre("Souli", Classe.A, groupe);
+        Monstre Monstre4 = new Monstre("Bipou", Classe.A, groupe);
+        Monstre Monstre5 = new Monstre("TotoroDepressif", Classe.A, groupe);
+        Monstre Monstre6 = new Monstre("Po", Classe.A, groupe);
+        Monstre Monstre7 = new Monstre("Bou", Classe.A, groupe);
+        Monstre Monstre8 = new Monstre("Maymay", Classe.A, groupe);
+        Monstre Monstre9 = new Monstre("Bribri", Classe.A, groupe);
+        Monstre Monstre10 = new Monstre("Alexandrie", Classe.A, groupe);
+        GroupeMonstres groupe1 = new GroupeMonstres();
 
         Monstre1.setClasse(Classe.A); //4
         Monstre2.setClasse(Classe.B); //3
