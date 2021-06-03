@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.herocorp.game.World;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.lieux.GuildeService;
+import com.herocorp.tools.Classe;
 
 
 public class UpdateGuildes {
@@ -26,7 +27,7 @@ public class UpdateGuildes {
     }
 
     public static void recrutement ( World world, Guilde guilde ) {
-        if (guilde.getArgent() - (2*GuildeService.montantAPayer(guilde) + 5000) >= 0) {
+        if (guilde.getArgent() - (GuildeService.montantAPayer(guilde) + Classe.S.getSalaire()) >= 0) {
             guilde.setRecrute(true);
         }
         else {
