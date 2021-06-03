@@ -17,7 +17,7 @@ public class GroupeRaidService {
     }
 
     public static void attaquerDonjon (GroupeRaid groupe) {
-        // TODO : vérifier si le groupe bat le donjon, sinon le groupe meurt
+        // TODO : renvoyer vrai si la force du groupe est supérieure à celle du donjon, faux sinon
     }
 
     public static void ajouterChasseur (GroupeRaid groupe, Chasseur chasseur) {
