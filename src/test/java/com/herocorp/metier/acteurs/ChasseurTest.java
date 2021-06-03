@@ -5,12 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.herocorp.metier.groupes.GroupeRaid;
-import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.tools.Classe;
 import com.herocorp.tools.Coord;
 
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
 
 /**
