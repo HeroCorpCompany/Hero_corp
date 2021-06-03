@@ -26,12 +26,15 @@ public class GuildeServiceTest
         chasseur2.setClasse(Classe.B); // Salaire des classes B : 300
         guilde.addMembre(chasseur1);
         guilde.addMembre(chasseur2);
-        int attendu = 2000-1000-300;
+        int attendu1 = 2000-1000-300;
+        int attendu2 = 1000;
         // RES
         GuildeService.payerSalaires(guilde);
-        int resultat = guilde.getArgent();
+        int resultat1 = guilde.getArgent();
+        int resultat2 = chasseur1.getArgent();
         // TEST
-        assertEquals(attendu, resultat);
+        assertEquals(attendu1, resultat1);
+        assertEquals(attendu2, resultat2);
     }
 }
 

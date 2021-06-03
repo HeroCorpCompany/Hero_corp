@@ -17,7 +17,9 @@ public class GuildeService {
         int size = guilde.getTaille();
 
         for(int i = 0; i < size; i++){
-            guilde.setArgent(guilde.getArgent() - ((Chasseur) guilde.getMembres().getListe().get(i)).getSalaire());
+            int salaire = ((Chasseur) guilde.getMembres().get(i)).getSalaire();
+            guilde.setArgent(guilde.getArgent() - salaire);
+            ((Chasseur) guilde.getMembres().get(i)).agmenterArgent(salaire);
         }
     }
 }

@@ -36,6 +36,9 @@ public class Chasseur extends AbstractActeur {
         this.argent = nouvelArgent;
     }
 
+    public void agmenterArgent (int montant) {
+        this.argent += montant;
+    }
 
 
     public Guilde getGuilde () {
