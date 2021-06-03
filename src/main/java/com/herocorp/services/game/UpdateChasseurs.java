@@ -8,7 +8,6 @@ import com.herocorp.metier.lieux.Forum;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.groupes.GroupeRaidService;
-import com.herocorp.services.metier.lieux.DonjonService;
 import com.herocorp.services.metier.lieux.ForumService;
 import com.herocorp.services.metier.lieux.GuildeService;
 import com.herocorp.tools.Classe;

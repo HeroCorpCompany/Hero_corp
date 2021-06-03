@@ -12,6 +12,7 @@ public class Guilde extends AbstractLieu {
     private GroupeChasseurs membres = new GroupeChasseurs ();
     private int argent = 0;
     private ArrayList <GroupeRaid> listeGroupes = new ArrayList<>();
+    private boolean recrute = false;
 
     public Guilde (Coord coord) {
         super ("Guilde", coord);
@@ -48,4 +49,13 @@ public class Guilde extends AbstractLieu {
     public void ajouterGroupe (GroupeRaid groupe) {
         this.listeGroupes.add(groupe);
     }
+
+    public boolean isRecruting () {
+        return this.recrute;
+    }
+
+    public void setRecrute (boolean newRecruting) {
+        this.recrute = newRecruting;
+    }
+
 }
