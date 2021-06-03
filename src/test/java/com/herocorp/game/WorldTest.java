@@ -11,6 +11,7 @@ import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.tools.Coord;
 
 import org.junit.Test;
 
@@ -83,7 +84,7 @@ public class WorldTest
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
         HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
         World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
-        Donjon donjon = new Donjon();
+        Donjon donjon = new Donjon(new Coord(0, 0));
         world.ajouterDonjon(donjon);;
         // RES
         boolean resultat = world.supprimerDonjon(donjon);
@@ -112,7 +113,7 @@ public class WorldTest
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
         HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
         World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
-        Guilde guilde = new Guilde();
+        Guilde guilde = new Guilde(new Coord(0, 0));
         world.ajouterGuilde(guilde);
         // RES
         boolean resultat = world.supprimerGuilde(guilde);
@@ -157,7 +158,7 @@ public class WorldTest
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
         HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
         World world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
-        AbstractLieu attendu = new AbstractLieu("Forum");
+        AbstractLieu attendu = new AbstractLieu("Forum", new Coord(0, 0));
         world.ajouterLieu("Forum", attendu);
         // RES
         AbstractLieu resultat = world.getLieu("Forum");

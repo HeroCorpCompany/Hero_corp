@@ -7,6 +7,7 @@ import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.tools.Coord;
 
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class ChasseurServiceTest
     public void testRejoindreGuilde() {
         // INIT
         Chasseur chasseur = new Chasseur("Souli");
-        Guilde attendu = new Guilde();
+        Guilde attendu = new Guilde(new Coord(0, 0));
         ChasseurService.rejoindreGuilde(chasseur, attendu);
         // RES
         Guilde resultat = chasseur.getGuilde();
@@ -29,7 +30,7 @@ public class ChasseurServiceTest
     public void testQuitterGuilde() {
         // INIT
         Chasseur chasseur = new Chasseur("Souli");
-        Guilde guilde = new Guilde();
+        Guilde guilde = new Guilde(new Coord(0, 0));
         ChasseurService.rejoindreGuilde(chasseur, guilde);
         ChasseurService.quitterGuilde(chasseur);
         // RES
@@ -67,7 +68,7 @@ public class ChasseurServiceTest
     public void testChangerLieu() {
         // INIT
         Chasseur chasseur = new Chasseur("Souli");
-        AbstractLieu attendu = new AbstractLieu("Amphi");
+        AbstractLieu attendu = new AbstractLieu("Amphi", new Coord(0, 0));
         ChasseurService.changerLieu(chasseur, attendu);
         // RES
         AbstractLieu resultat = chasseur.getPosition();

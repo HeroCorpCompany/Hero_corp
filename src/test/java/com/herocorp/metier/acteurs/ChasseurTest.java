@@ -8,6 +8,7 @@ import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.tools.Classe;
+import com.herocorp.tools.Coord;
 
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
@@ -44,7 +45,7 @@ public class ChasseurTest
     @Test
     public void testGuilde() {
         // INIT
-        Guilde attendu = new Guilde();
+        Guilde attendu = new Guilde(new Coord(0, 0));
         Chasseur chasseur = new Chasseur("Souli");
         chasseur.setGuilde(attendu);
         // RES
@@ -66,7 +67,7 @@ public class ChasseurTest
     @Test
     public void testIsInGuildeTrue() {
         // INIT
-        Guilde guilde = new Guilde();
+        Guilde guilde = new Guilde(new Coord(0, 0));
         Chasseur chasseur = new Chasseur("Souli");
         chasseur.setGuilde(guilde);
         // RES

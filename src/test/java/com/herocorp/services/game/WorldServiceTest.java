@@ -12,6 +12,7 @@ import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.tools.Coord;
 
 import org.junit.Test;
 
@@ -43,7 +44,7 @@ public class WorldServiceTest
     @Test
     public void testDetruireDonjon () {
         // INIT
-        Donjon donjon = new Donjon();
+        Donjon donjon = new Donjon(new Coord(0, 0));
         ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
         ArrayList <Donjon> listeDonjons = new ArrayList<>();
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
@@ -59,7 +60,7 @@ public class WorldServiceTest
     @Test
     public void testDetruireGuilde () {
         // INIT
-        Guilde guilde = new Guilde();
+        Guilde guilde = new Guilde(new Coord(0, 0));
         ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
         ArrayList <Donjon> listeDonjons = new ArrayList<>();
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
