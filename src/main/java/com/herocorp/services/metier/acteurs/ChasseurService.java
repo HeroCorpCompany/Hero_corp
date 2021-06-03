@@ -8,23 +8,23 @@ import com.herocorp.metier.lieux.Guilde;
 public class ChasseurService {
     
     public static void rejoindreGuilde (Chasseur chasseur, Guilde guilde) {
-        // TODO : Ajouter la guilde au chasseur
+        chasseur.setGuilde(guilde);
     }
 
-    public static void quitterGuilde (Chasseur chasseur, Guilde guilde) {
-        // TODO : Retirer la guilde du chasseur
+    public static void quitterGuilde (Chasseur chasseur) {
+        chasseur.setGuilde(null);
     }
 
     public static void rejoindreRaid (Chasseur chasseur, GroupeRaid groupe) {
-        // TODO : ajouter le groupe de raid au chasseur
+        chasseur.setGroupe(groupe);
     }
 
-    public static void quitterRaid (Chasseur chasseur, GroupeRaid groupe) {
-        // TODO : retirer le raid du chasseur
+    public static void quitterRaid (Chasseur chasseur) {
+        chasseur.setGroupe(null);
     }
 
     public static void changerLieu (Chasseur chasseur, AbstractLieu lieu) {
-        // TODO : ajouter le lieu au chasseur
+        chasseur.setPosition(lieu);
     }
 
 }
