@@ -1,9 +1,12 @@
 package com.herocorp.metier.groupes;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.tools.Coord;
 
 import org.junit.Test;
 
@@ -59,6 +62,23 @@ public class GroupeRaidTest
         assertTrue(resultat1);
         assertFalse(resultat2);
 
+    }
+
+    @Test
+    public void testGuilde () {
+        // INIT
+        GroupeRaid groupe1 = new GroupeRaid();
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        groupe1.setGuilde(guilde);
+        GroupeRaid groupe2  = new GroupeRaid();
+        // RES
+        boolean resultat1 = groupe1.hasGuilde();
+        boolean resultat2 = groupe2.hasGuilde();
+        Guilde resultat3 = groupe1.getGuilde();
+        // TEST
+        assertTrue(resultat1);
+        assertFalse(resultat2);
+        assertEquals(guilde, resultat3);
     }
 
 }
