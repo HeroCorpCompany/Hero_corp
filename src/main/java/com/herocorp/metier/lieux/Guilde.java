@@ -1,13 +1,17 @@
 package com.herocorp.metier.lieux;
 
+import java.util.ArrayList;
+
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeChasseurs;
+import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.tools.Coord;
 
 public class Guilde extends AbstractLieu {
     
     private GroupeChasseurs membres = new GroupeChasseurs ();
     private int argent = 0;
+    private ArrayList <GroupeRaid> listeGroupes = new ArrayList<>();
 
     public Guilde (Coord coord) {
         super ("Guilde", coord);
@@ -35,5 +39,13 @@ public class Guilde extends AbstractLieu {
 
     public int getTaille () {
         return this.membres.getTaille();
+    }
+
+    public ArrayList <GroupeRaid> getListeGroupes () {
+        return this.listeGroupes;
+    }
+
+    public void ajouterGroupe (GroupeRaid groupe) {
+        this.listeGroupes.add(groupe);
     }
 }

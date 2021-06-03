@@ -39,4 +39,8 @@ public class WorldService {
     public static boolean detruireGroupe (World world, GroupeRaid groupeCible) {
         return world.supprimerGroupe(groupeCible);
     }
+
+    public static void ajouterGroupe (World world, GroupeRaid groupe) {
+        world.ajouterGroupe(groupe);
+    }
 }
