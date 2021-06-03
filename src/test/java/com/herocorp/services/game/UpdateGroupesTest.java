@@ -15,6 +15,7 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.services.metier.lieux.DonjonService;
+import com.herocorp.tools.Classe;
 import com.herocorp.tools.Coord;
 
 import org.junit.Test;
@@ -81,6 +82,7 @@ public class UpdateGroupesTest {
         groupe.setCible(donjon);
         for (int i = 0; i < 10; i++) {
             Chasseur chasseur = world.getListeChasseurs().get(i);
+            chasseur.setClasse(Classe.CITOYEN);
             ChasseurService.changerLieu(chasseur, donjon);
             GroupeRaidService.ajouterChasseur(groupe, chasseur);
             ChasseurService.rejoindreRaid(chasseur, groupe);

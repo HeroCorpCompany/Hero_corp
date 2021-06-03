@@ -1,5 +1,7 @@
 package com.herocorp.services.game;
 
+import java.util.ArrayList;
+
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.AbstractActeur;
 import com.herocorp.metier.acteurs.Chasseur;
@@ -17,6 +19,9 @@ public class UpdateGroupes {
 
     public static void updateGroupes ( World world ) {
         // TODO : voir arbre groupes
+        ArrayList <GroupeRaid> listeGroupesASupprimer = new ArrayList<>();
+        ArrayList <Chasseur> listeChasseursASupprimer = new ArrayList<>();
+        ArrayList <Donjon> listeDonjonsASupprimer = new ArrayList<>();
         for (GroupeRaid groupe : world.getListeGroupes()) {
             if (groupe.getPosition().getClass().isInstance(new Donjon(new Coord(0, 0)))) {
                 if (groupe.combatForce() >= groupe.getCible().getGroupeMonstres().combatForce()) {
@@ -43,15 +48,17 @@ public class UpdateGroupes {
                         }
                         ChasseurService.quitterRaid(chasseur);
                     }
-                    WorldService.detruireGroupe(world, groupe);
-                    WorldService.detruireDonjon(world, groupe.getCible());
+                    listeGroupesASupprimer.add(groupe);
+                    listeDonjonsASupprimer.add(groupe.getCible());
                 } else {
                     for (AbstractActeur acteur : groupe.getListe()) {
                         Chasseur chasseur = (Chasseur)acteur;
-                        WorldService.tuerChasseur(world, chasseur);
-                        GuildeService.retirerChasseur(chasseur.getGuilde(), chasseur);
+                        listeChasseursASupprimer.add(chasseur);
+                        if (chasseur.getGuilde() != null) {
+                            GuildeService.retirerChasseur(chasseur.getGuilde(), chasseur);
+                        }
                     }
-                    WorldService.detruireGroupe(world, groupe);
+                    listeGroupesASupprimer.add(groupe);
                 }
 
             } else {
@@ -64,6 +71,27 @@ public class UpdateGroupes {
                     // Attendre
                 }
             }
+        }
+        supprimerChasseurs(world, listeChasseursASupprimer);
+        supprimerDonjons(world, listeDonjonsASupprimer);
+        supprimerGroupes(world, listeGroupesASupprimer);
+    }
+
+    public static void supprimerGroupes (World world, ArrayList <GroupeRaid> listeGroupesASupprimer) {
+        for (GroupeRaid groupe : listeGroupesASupprimer) {
+            WorldService.detruireGroupe(world, groupe);
+        }
+    }
+
+    public static void supprimerDonjons (World world, ArrayList <Donjon> listeDonjonsASupprimer) {
+        for (Donjon donjon : listeDonjonsASupprimer) {
+            WorldService.detruireDonjon(world, donjon);
+        }
+    }
+
+    public static void supprimerChasseurs (World world, ArrayList <Chasseur> listeChasseursASupprimer) {
+        for (Chasseur chasseur : listeChasseursASupprimer) {
+            WorldService.tuerChasseur(world, chasseur);
         }
     }
     
