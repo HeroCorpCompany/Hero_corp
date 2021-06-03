@@ -1,7 +1,6 @@
 package com.herocorp.services.game;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ import org.junit.Test;
 
 public class UpdateGuildesTest {
     @Test
-    public void testGroupeMonstre() {
+    public void testUpdateGuildes() {
         // INIT
         World world = genererWorld();
         
@@ -68,14 +67,17 @@ public class UpdateGuildesTest {
         world.ajouterGuilde(guilde2);
         world.ajouterGuilde(guilde3);
 
+        int attendu1 = 2;
         boolean attendu2 = true;
         boolean attendu3 = false;
         // RES
+        UpdateGuildes.updateGuildes(world);
+        int resultat1 = world.getListeGuildes().size();
         boolean resultat2 = world.getListeGuildes().get(0).isRecruting();
         boolean resultat3 = world.getListeGuildes().get(1).isRecruting();
 
         // TEST
-        assertFalse(world.supprimerGuilde(guilde1));
+        assertEquals(attendu1, resultat1);
         assertEquals(attendu2, resultat2);
         assertEquals(attendu3, resultat3);
     }

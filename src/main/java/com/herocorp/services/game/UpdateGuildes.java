@@ -13,16 +13,13 @@ public class UpdateGuildes {
     public static void updateGuildes ( World world ) {
         ArrayList<Guilde> listeGuildes = world.getListeGuildes();
         for (int i = 0; i < listeGuildes.size(); i++) {
-            updateGuild(world, listeGuildes.get(i));
-        }
-    }
-
-    public static void updateGuild ( World world, Guilde guilde ) {
-        if (guilde.getArgent() < 0) {
-            recrutement(world, guilde);
-        }
-        else {
-            world.supprimerGuilde(guilde);
+            if (listeGuildes.get(i).getArgent() < 0) {
+                WorldService.detruireGuilde(world, listeGuildes.get(i));
+                i--;
+            }
+            else {
+                recrutement(world, listeGuildes.get(i));
+            }
         }
     }
 
