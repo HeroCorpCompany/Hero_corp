@@ -24,6 +24,8 @@ public class GuildeServiceTest
         Chasseur chasseur2 = new Chasseur("Man");
         chasseur1.setClasse(Classe.A); // Salaire des classes A : 1000
         chasseur2.setClasse(Classe.B); // Salaire des classes B : 300
+        guilde.addMembre(chasseur1);
+        guilde.addMembre(chasseur2);
         int attendu = 2000-1000-300;
         // RES
         GuildeService.payerSalaires(guilde);
