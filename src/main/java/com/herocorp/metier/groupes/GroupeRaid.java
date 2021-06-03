@@ -3,11 +3,13 @@ package com.herocorp.metier.groupes;
 import java.util.ArrayList;
 
 import com.herocorp.metier.acteurs.AbstractActeur;
+import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
 
 public class GroupeRaid extends GroupeChasseurs {
 
     private Guilde guilde = null;
+    private Donjon cible = null;
     
     public GroupeRaid () {
         super ();
@@ -19,6 +21,10 @@ public class GroupeRaid extends GroupeChasseurs {
 
     public void setGuilde (Guilde guilde) {
         this.guilde = guilde;
+    }
+
+    public Guilde getGuilde () {
+        return this.guilde;
     }
 
     public boolean isPlein () {
@@ -36,4 +42,12 @@ public class GroupeRaid extends GroupeChasseurs {
         int forceMoy = forceTot/chasseurs.size();
         return forceMoy;
     }
+
+    public Donjon getCible () {
+        return this.cible;
+    }
+
+    public void setCible (Donjon donjon) {
+        this.cible = donjon;
+    } 
 }

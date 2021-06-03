@@ -8,7 +8,7 @@ public class GroupeRaidService {
     
     public static boolean verifierGroupe (GroupeRaid groupe) {
         // TODO : vérifier la taille du groupe
-        return false;
+        return groupe.getTaille() == 10;
     }
 
     public static void allerDonjon (GroupeRaid groupe, Donjon donjon) {

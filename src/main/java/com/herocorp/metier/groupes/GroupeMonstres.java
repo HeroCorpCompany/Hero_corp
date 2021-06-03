@@ -21,6 +21,6 @@ public class GroupeMonstres extends AbstractGroupe {
         double forceMoy = forceTot/mobs.size();
         Random rnd = new Random();
         double randomParam = rnd.nextGaussian();
-        return forceMoy*randomParam;
+        return forceMoy + randomParam;
     }
 }
