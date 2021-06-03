@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.services.metier.acteurs.ChasseurService;
+import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.tools.Coord;
 
 import org.junit.Test;
@@ -79,6 +81,25 @@ public class GroupeRaidTest
         assertTrue(resultat1);
         assertFalse(resultat2);
         assertEquals(guilde, resultat3);
+    }
+
+    @Test
+    public void testCombatForce () {
+        // INIT
+        GroupeRaid groupe = new GroupeRaid();
+        int forceTotale = 0;
+        for (int i = 0; i < 10; i++) {
+            Chasseur chasseur = new Chasseur("Souli");
+            ChasseurService.attribuerClasse(chasseur);
+            forceTotale += chasseur.getForce();
+            GroupeRaidService.ajouterChasseur(groupe, chasseur);
+            ChasseurService.rejoindreRaid(chasseur, groupe);
+        }
+        // RES
+        int resultat = groupe.combatForce();
+        // TEST
+        assertEquals(forceTotale / groupe.getTaille(), resultat);
+
     }
 
 }
