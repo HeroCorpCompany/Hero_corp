@@ -23,7 +23,7 @@ public class GuildeServiceTest
         Chasseur chasseur1 = new Chasseur("Souli");
         Chasseur chasseur2 = new Chasseur("Man");
         chasseur1.setClasse(Classe.A); // Salaire des classes A : 1000
-        chasseur1.setClasse(Classe.B); // Salaire des classes B : 300
+        chasseur2.setClasse(Classe.B); // Salaire des classes B : 300
         int attendu = 2000-1000-300;
         // RES
         GuildeService.payerSalaires(guilde);
