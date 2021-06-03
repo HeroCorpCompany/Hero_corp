@@ -36,5 +36,23 @@ public class GuildeServiceTest
         assertEquals(attendu1, resultat1);
         assertEquals(attendu2, resultat2);
     }
+
+    @Test
+    public void testMontantAPayer()
+    {
+        // INIT
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        Chasseur chasseur1 = new Chasseur("Souli");
+        Chasseur chasseur2 = new Chasseur("Man");
+        chasseur1.setClasse(Classe.A); // Salaire des classes A : 1000
+        chasseur2.setClasse(Classe.B); // Salaire des classes B : 300
+        guilde.addMembre(chasseur1);
+        guilde.addMembre(chasseur2);
+        int attendu = 1000 + 300;
+        // RES
+        int resultat = GuildeService.montantAPayer(guilde);
+        // TEST
+        assertEquals(attendu, resultat);
+    }
 }
 
