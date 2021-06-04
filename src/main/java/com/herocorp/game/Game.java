@@ -15,9 +15,8 @@ import com.herocorp.tools.Coord;
 
 public class Game {
     private World world;
-    private int nbIteration;
 
-    public Game (int nbIteration) {
+    public Game () {
         ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
         ArrayList <Donjon> listeDonjons = new ArrayList<>();
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
@@ -37,11 +36,14 @@ public class Game {
         }
 
         this.world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
-        this.nbIteration = nbIteration;
     }
 
-    public void run (){
-        for (int i = 0; i < this.nbIteration; i++) {
+    public Game (World world) {
+        this.world = world;
+    }
+
+    public void run (int nbIteration){
+        for (int i = 0; i < nbIteration; i++) {
             update();
             render();
         }
