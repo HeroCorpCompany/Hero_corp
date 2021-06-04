@@ -124,7 +124,7 @@ public class UpdateChasseurs {
 
     public static GroupeRaid groupeDispoGuilde (Guilde guilde) {
         for (GroupeRaid groupe : guilde.getListeGroupes()) {
-            if (GroupeRaidService.verifierGroupe(groupe)) {
+            if (GroupeRaidService.verifierGroupe(groupe) == false) {
                 return groupe;
             }
         }

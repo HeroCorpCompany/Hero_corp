@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.services.metier.lieux.DonjonService;
+import com.herocorp.services.metier.lieux.GuildeService;
 import com.herocorp.tools.Classe;
 import com.herocorp.tools.Coord;
 
@@ -166,6 +168,108 @@ public class UpdateChasseursTest {
         boolean resultat = chasseur.getPosition() == forum;
         // TEST
         assertTrue(resultat);
+    }
+
+    @Test
+    public void testNonNonGuildeNon () {
+        // NonNonGuildeNon : Se trouve dans la guilde mais n'en fait pas partie, donc il va au forum
+        // INIT
+        World world = genererWorld();
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        world.ajouterGuilde(guilde);
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        ChasseurService.changerLieu(chasseur, guilde);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat1 = chasseur.getPosition() != guilde;
+        boolean resultat2 = chasseur.getPosition() == world.getLieu("Forum");
+        // TEST
+        assertTrue(resultat1);
+        assertTrue(resultat2);
+    }
+
+    @Test
+    public void testNonNonGuildeOuiOui () {
+        // NonNonGuildeOuiOui : Le joueur est dans sa guilde, dans un groupe, donc il attend
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        GuildeService.ajouterChasseur(guilde, chasseur);
+        ChasseurService.rejoindreGuilde(chasseur, guilde);
+        ChasseurService.changerLieu(chasseur, guilde);
+        GroupeRaid groupe = new GroupeRaid();
+        GroupeRaidService.ajouterChasseur(groupe, chasseur);
+        groupe.setGuilde(guilde);
+        ChasseurService.rejoindreRaid(chasseur, groupe);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat1 = chasseur.getPosition() == guilde;
+        boolean resultat2 = chasseur.isInGroupe();
+        // TEST
+        assertTrue(resultat1);
+        assertTrue(resultat2);
+    }
+
+    @Test
+    public void testNonNonGuildeOuiNonOui () {
+        // NonNonGuildeOuiNonOui : Le chasseur est dans sa guilde et un groupe est libre, il le rejoint
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        GroupeRaid groupe = new GroupeRaid();
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        groupe.setGuilde(guilde);
+        guilde.ajouterGroupe(groupe);
+        world.ajouterGuilde(guilde);
+        ChasseurService.rejoindreGuilde(chasseur, guilde);
+        GuildeService.ajouterChasseur(guilde, chasseur);
+        ChasseurService.changerLieu(chasseur, guilde);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat = chasseur.isInGroupe();
+        // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testNonNonGuildeOuiNonNonOui () {
+        // NonNonGuildeOuiNonNonOui : Pas de groupe libre mais donjon dispo
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        GuildeService.ajouterChasseur(guilde, chasseur);
+        ChasseurService.rejoindreGuilde(chasseur, guilde);
+        Donjon donjon = new Donjon(new Coord(0, 0));
+        world.ajouterDonjon(donjon);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat = chasseur.isInGroupe();
+        // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testNonNonGuildeOuiNonNonNon () {
+        // NonNonGuildeOuiNonNonNon : Dans la guilde, pas de groupe ni de donjon dispo, le chasseur attend
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        Guilde guilde = new Guilde(new Coord(0, 0));
+        GuildeService.ajouterChasseur(guilde, chasseur);
+        ChasseurService.rejoindreGuilde(chasseur, guilde);
+        ChasseurService.changerLieu(chasseur, guilde);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat = chasseur.isInGroupe();
+        // TEST
+        assertFalse(resultat);
     }
 
 
