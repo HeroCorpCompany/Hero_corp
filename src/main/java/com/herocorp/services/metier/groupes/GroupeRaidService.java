@@ -1,6 +1,9 @@
 package com.herocorp.services.metier.groupes;
+import java.util.ArrayList;
 
 import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.metier.acteurs.AbstractActeur;
+
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.groupes.GroupeMonstres;
 import com.herocorp.metier.lieux.Donjon;
@@ -15,6 +18,11 @@ public class GroupeRaidService {
     public static void allerDonjon (GroupeRaid groupe, Donjon donjon) {
         // TODO : changer la position du raid et de ses membres, mettre à jour le donjon
         groupe.setPosition(donjon);
+        groupe.setCible(donjon);
+        ArrayList <AbstractActeur> listeChasseur = groupe.getListe(); 
+        for(AbstractActeur chasseur: listeChasseur){
+            chasseur.setPosition(donjon);
+          }
     }
 
     public static boolean attaquerDonjon (GroupeRaid groupe) {
@@ -23,7 +31,7 @@ public class GroupeRaidService {
         GroupeMonstres grpMonstre = groupe.getCible().getGroupeMonstres();
         double forceMoyMonstres = grpMonstre.combatForce();
 
-        return(forceMoyChasseur > forceMoyMonstres);
+        return (forceMoyChasseur > forceMoyMonstres) ;
     }
 
     public static void ajouterChasseur (GroupeRaid groupe, Chasseur chasseur) {
