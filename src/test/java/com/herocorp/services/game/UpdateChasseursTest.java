@@ -9,11 +9,13 @@ import java.util.HashMap;
 
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Forum;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
+import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.services.metier.lieux.DonjonService;
 import com.herocorp.tools.Classe;
 import com.herocorp.tools.Coord;
@@ -87,12 +89,83 @@ public class UpdateChasseursTest {
         World world = genererWorld();
         Guilde guilde = new Guilde(new Coord(0, 0));
         guilde.setRecrute(true);
+        world.ajouterGuilde(guilde);
         Chasseur chasseur = world.getListeChasseurs().get(0);
         ChasseurService.attribuerClasse(chasseur);
         UpdateChasseurs.updateChasseurs(world);
         // RES
-
+        boolean resultat = chasseur.getGuilde() != null;
         // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testNonNonForumNonNonOui () {
+        // NonNonForumNonNonOui : Pas de guilde libre mais groupe libre, il le rejoint
+        // INIT
+        World world = genererWorld();
+        GroupeRaid groupe = new GroupeRaid();
+        Forum forum = (Forum) world.getLieu("Forum");
+        world.ajouterGroupe(groupe);
+        groupe.setPosition(forum);
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat1 = chasseur.isInGroupe();
+        boolean resultat2 = world.getListeChasseurs().get(1).isInGroupe();
+        // TEST
+        assertTrue(resultat1);
+        assertFalse(resultat2);
+    }
+
+    @Test
+    public void testNonNonForumNonNonNonOui () {
+        // NonNonForumNonNonNonOui : Pas de groupe disponible mais donjon libre, donc il crée un groupe
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        Donjon donjon = new Donjon(new Coord(0, 0));
+        world.ajouterDonjon(donjon);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat = chasseur.isInGroupe();
+        // TEST
+        assertTrue(resultat);
+    }
+
+    @Test
+    public void testNonNonForumNonNonNonNon () {
+        // NonNonForumNonNonNonNon : Pas de donjon libre, il attend
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat = chasseur.isInGroupe();
+        // TEST
+        assertFalse(resultat);
+    }
+
+    @Test
+    public void testNonNonForumOui () {
+        // NonNonForumOui : Le chasseur est au forum dans un groupe, il attend
+        // INIT
+        World world = genererWorld();
+        Chasseur chasseur = world.getListeChasseurs().get(0);
+        ChasseurService.attribuerClasse(chasseur);
+        GroupeRaid groupe = new GroupeRaid();
+        Forum forum = (Forum) world.getLieu("Forum");
+        groupe.setPosition(forum);
+        ChasseurService.rejoindreRaid(chasseur, groupe);
+        GroupeRaidService.ajouterChasseur(groupe, chasseur);
+        UpdateChasseurs.updateChasseurs(world);
+        // RES
+        boolean resultat = chasseur.getPosition() == forum;
+        // TEST
+        assertTrue(resultat);
     }
 
 
@@ -103,11 +176,7 @@ public class UpdateChasseursTest {
         HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
         Forum forum = new Forum(new Coord(0, 0));
         mapLieux.put("Forum", forum);
-        for (int i = 0; i < 10; i++) {
-            Donjon donjon = new Donjon(new Coord(0, 0));
-            DonjonService.remplirDonjon(donjon);
-            listeDonjons.add(donjon);
-        }
+        
         for (int i = 0; i < 90; i++) {
             Chasseur chasseur = new Chasseur("Souli");
             ChasseurService.changerLieu(chasseur, forum);
