@@ -1,5 +1,7 @@
 package com.herocorp.services.game;
 
+import java.util.ArrayList;
+
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
@@ -16,12 +18,13 @@ import com.herocorp.tools.Coord;
 public class UpdateChasseurs {
     
     public static void updateChasseurs (World world) {
+        ArrayList <Chasseur> listeChasseursASupprimer = new ArrayList<>();
         for (Chasseur chasseur : world.getListeChasseurs()) {
-            if (chasseur.getAge() > 10000) {
-                WorldService.tuerChasseur(world, chasseur);
+            if (chasseur.getAge() >= 10000) {
+                listeChasseursASupprimer.add(chasseur);
             } else {
                 if (chasseur.getClasse() == Classe.CITOYEN) {
-                    if (chasseur.getAge() > 200) {
+                    if (chasseur.getAge() >= 200) {
                         ChasseurService.attribuerClasse(chasseur);
                     } else {
                         // Attendre
@@ -89,6 +92,7 @@ public class UpdateChasseurs {
                 }
             }
         }
+        supprimerChasseurs(world, listeChasseursASupprimer);
     }
 
     public static Guilde guildeRecrute (World world) {
@@ -125,5 +129,11 @@ public class UpdateChasseurs {
             }
         }
         return null;
+    }
+
+    public static void supprimerChasseurs (World world, ArrayList <Chasseur> listeChasseursASupprimer) {
+        for (Chasseur chasseur : listeChasseursASupprimer) {
+            WorldService.tuerChasseur(world, chasseur);
+        }
     }
 }
