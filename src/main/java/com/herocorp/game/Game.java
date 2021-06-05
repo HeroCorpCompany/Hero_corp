@@ -54,7 +54,6 @@ public class Game {
 
     public void update () {
         WorldService.updateWorld(this.world);
-        WorldService.updateTemps(this.world);
     }
 
     public void render () {
