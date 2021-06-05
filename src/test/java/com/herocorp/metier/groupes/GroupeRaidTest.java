@@ -9,6 +9,7 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.tools.Coord;
+import com.herocorp.metier.lieux.*;
 
 import org.junit.Test;
 
@@ -102,5 +103,22 @@ public class GroupeRaidTest
 
     }
 
+    @Test
+    public void testSetGetCible () {
+        // INIT
+        GroupeRaid groupe = new GroupeRaid();
+        for (int i = 0; i < 10; i++) {
+            Chasseur chasseur = new Chasseur("Souli");
+            GroupeRaidService.ajouterChasseur(groupe, chasseur);
+            ChasseurService.rejoindreRaid(chasseur, groupe);
+        }
+        Donjon donjon = new Donjon(new Coord(0, 0));
+        // RES
+        groupe.setCible(donjon);
+        Donjon resultat = groupe.getCible();
+        // TEST
+        assertEquals(resultat,donjon);
+
+    }
 }
 
