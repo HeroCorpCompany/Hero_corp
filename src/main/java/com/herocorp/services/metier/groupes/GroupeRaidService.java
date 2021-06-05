@@ -19,6 +19,7 @@ public class GroupeRaidService {
         // TODO : changer la position du raid et de ses membres, mettre à jour le donjon
         groupe.setPosition(donjon);
         groupe.setCible(donjon);
+        donjon.setGroupeRaid(groupe);
         ArrayList <AbstractActeur> listeChasseur = groupe.getListe(); 
         for(AbstractActeur chasseur: listeChasseur){
             chasseur.setPosition(donjon);
