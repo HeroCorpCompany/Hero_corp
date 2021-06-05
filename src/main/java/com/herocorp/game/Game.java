@@ -15,6 +15,7 @@ import com.herocorp.tools.Coord;
 
 public class Game {
     private World world;
+    private Statistiques stats;
 
     public Game () {
         ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
@@ -36,10 +37,12 @@ public class Game {
         }
 
         this.world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
+        this.stats = new Statistiques(this.world);
     }
 
     public Game (World world) {
         this.world = world;
+        this.stats = new Statistiques(this.world);
     }
 
     public void run (int nbIteration){
@@ -55,6 +58,6 @@ public class Game {
     }
 
     public void render () {
-        System.out.println(this.world);
+        System.out.println(this.stats);
     }
 }
