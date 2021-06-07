@@ -18,11 +18,9 @@ public class WorldService {
         UpdateGroupes.updateGroupes(world);
         UpdateGuildes.updateGuildes(world);
         WorldService.updateTemps(world);
+        UpdateDonjons.updateDonjons(world);
     }
 
-    public static void genererDonjons (World world) {
-        // TODO : générer un nombre aléatoire de donjons et les ajouter à la liste des donjons
-    }
 
     public static boolean detruireDonjon (World world, Donjon donjonCible) {
         return world.supprimerDonjon(donjonCible);
