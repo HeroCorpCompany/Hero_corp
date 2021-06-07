@@ -8,7 +8,6 @@ import java.util.HashMap;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.AbstractActeur;
 import com.herocorp.metier.acteurs.Chasseur;
-import com.herocorp.metier.acteurs.Monstre;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;

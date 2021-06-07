@@ -3,7 +3,6 @@ import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.*;
 import com.herocorp.tools.Coord;
-import com.herocorp.services.*;
 
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.lieux.DonjonService;
@@ -228,7 +227,6 @@ public class GroupeRaidServiceTest
         
         boolean resultat = GroupeRaidService.attaquerDonjon(groupe1);
         // TEST 
-        System.out.println(resultat);
         assertTrue(resultat || !resultat);
        
     }
