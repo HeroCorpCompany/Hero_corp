@@ -52,6 +52,7 @@ public class UpdateChasseurs {
                                         ChasseurService.rejoindreRaid(chasseur, newGroupe);
                                         GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
                                         WorldService.ajouterGroupe(world, newGroupe);
+                                        newGroupe.setPosition(chasseur.getPosition());
                                     } else {
                                         // Attendre
                                     }
@@ -76,6 +77,7 @@ public class UpdateChasseurs {
                                         ChasseurService.rejoindreRaid(chasseur, newGroupe);
                                         chasseur.getGuilde().ajouterGroupe(newGroupe);
                                         newGroupe.setGuilde(chasseur.getGuilde());
+                                        newGroupe.setPosition(chasseur.getPosition());
                                     } else {
                                         // Attendre, TODO : potentiellement quitter la guilde !
                                     }

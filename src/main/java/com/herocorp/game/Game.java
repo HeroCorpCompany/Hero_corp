@@ -46,10 +46,12 @@ public class Game {
     }
 
     public void run (int nbIteration){
+        render();
         for (int i = 0; i < nbIteration; i++) {
+            
             update();
-            render();
         }
+        render();
     }
 
     public void update () {
