@@ -11,6 +11,7 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.game.WorldService;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.lieux.DonjonService;
+import com.herocorp.tools.Classe;
 import com.herocorp.tools.Coord;
 
 public class Game {

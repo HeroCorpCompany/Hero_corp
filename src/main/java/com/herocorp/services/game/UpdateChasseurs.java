@@ -60,6 +60,7 @@ public class UpdateChasseurs {
                                     if (donjon != null) {
                                         GroupeRaid newGroupe = new GroupeRaid();
                                         newGroupe.setCible(donjon);
+                                        donjon.setGroupeRaid(newGroupe);
                                         ChasseurService.rejoindreRaid(chasseur, newGroupe);
                                         GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
                                         WorldService.ajouterGroupe(world, newGroupe);
@@ -84,6 +85,7 @@ public class UpdateChasseurs {
                                     if (donjon != null) {
                                         GroupeRaid newGroupe = new GroupeRaid();
                                         newGroupe.setCible(donjon);
+                                        donjon.setGroupeRaid(newGroupe);
                                         GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
                                         ChasseurService.rejoindreRaid(chasseur, newGroupe);
                                         chasseur.getGuilde().ajouterGroupe(newGroupe);

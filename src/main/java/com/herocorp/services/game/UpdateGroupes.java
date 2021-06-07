@@ -58,6 +58,8 @@ public class UpdateGroupes {
                             GuildeService.retirerChasseur(chasseur.getGuilde(), chasseur);
                         }
                     }
+                    Donjon donjon = groupe.getCible();
+                    donjon.setGroupeRaid(null);
                     listeGroupesASupprimer.add(groupe);
                 }
 
