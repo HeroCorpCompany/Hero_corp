@@ -33,18 +33,25 @@ public class ChasseurService {
     public static void attribuerClasse (Chasseur chasseur) {
         Classe classe = null;
         Random rnd = new Random();
-        int randomInt = rnd.nextInt(100);
-
-        if (randomInt < 35) {
-            classe = Classe.D;
-        } else if (randomInt < 60) {
-            classe = Classe.C;
-        } else if (randomInt < 80) {
-            classe = Classe.B;
-        } else if (randomInt < 95) {
-            classe = Classe.A;
-        } else {
-            classe = Classe.S;
+        int number = rnd.nextInt(5);
+        switch ( number ) {
+            case 0:
+                classe = Classe.D;
+                break;
+            case 1:
+                classe = Classe.C;
+                break;
+            case 2:
+                classe = Classe.B;
+                break;
+            case 3:
+                classe = Classe.A;
+                break;
+            case 4:
+                classe = Classe.S;
+                break;
+            default:
+                classe = Classe.D;
         }
         chasseur.setClasse(classe);
     }
