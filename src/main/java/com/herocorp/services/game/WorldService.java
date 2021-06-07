@@ -1,5 +1,5 @@
 package com.herocorp.services.game;
-
+import java.util.ArrayList;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
@@ -11,6 +11,9 @@ public class WorldService {
     public static void updateTemps (World world) {
         int tempsActuel = world.getTemps();
         world.setTemps(tempsActuel + 1);
+        for (Chasseur chasseur : world.getListeChasseurs()) {
+            chasseur.setAge(chasseur.getAge()+1);
+        }
     }
 
     public static void updateWorld (World world) {

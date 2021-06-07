@@ -22,20 +22,20 @@ public class UpdateChasseurs {
         ArrayList <Chasseur> listeChasseursASupprimer = new ArrayList<>();
         int nbEnfants = 0;
         for (Chasseur chasseur : world.getListeChasseurs()) {
-            if (chasseur.getAge() >= 10000) {
+            if (chasseur.getAge() >= 150) {
                 listeChasseursASupprimer.add(chasseur);
             } 
-            else if(chasseur.getAge() >= 1000)
-            {
-                Random rnd = new Random();
-                if (rnd.nextDouble() <0.3){
-                    nbEnfants +=1;
-                };
-            }
             
             else {
+                if(chasseur.getAge() >= 10)
+                {
+                    Random rnd = new Random();
+                    if (rnd.nextDouble() <0.5){
+                        nbEnfants +=1;
+                    };
+                }
                 if (chasseur.getClasse() == Classe.CITOYEN) {
-                    if (chasseur.getAge() >= 200) {
+                    if (chasseur.getAge() >= 5) {
                         ChasseurService.attribuerClasse(chasseur);
                     } else {
                         // Attendre

@@ -1,17 +1,21 @@
 package com.herocorp.services.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.herocorp.game.World;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.lieux.GuildeService;
 import com.herocorp.tools.Classe;
-
+import com.herocorp.tools.Coord;
 
 public class UpdateGuildes {
     
     public static void updateGuildes ( World world ) {
         ArrayList<Guilde> listeGuildes = world.getListeGuildes();
+        if (listeGuildes.size() < 7) {
+            genererGuildes(world);
+        }
         for (int i = 0; i < listeGuildes.size(); i++) {
             if (listeGuildes.get(i).getArgent() < 0) {
                 WorldService.detruireGuilde(world, listeGuildes.get(i));
@@ -30,5 +34,17 @@ public class UpdateGuildes {
         else {
             guilde.setRecrute(false);
         }
+    }
+
+
+    public static void genererGuildes (World world) {
+        Random r = new Random();
+        int newGuilde = r.nextInt(6); 
+        for (int i = 0; i < newGuilde; i++){
+            Guilde guilde = new Guilde(new Coord(0, 0));
+            int randomArgent = r.nextInt(50);
+            guilde.setArgent(randomArgent);
+            world.ajouterGuilde(guilde);
+        };
     }
 }
