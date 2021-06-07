@@ -51,8 +51,9 @@ public class Game {
         for (int i = 0; i < nbIteration; i++) {
             
             update();
+            render();
         }
-        render();
+        
     }
 
     public void update () {

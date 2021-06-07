@@ -1,6 +1,7 @@
 package com.herocorp.services.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
@@ -19,10 +20,20 @@ public class UpdateChasseurs {
     
     public static void updateChasseurs (World world) {
         ArrayList <Chasseur> listeChasseursASupprimer = new ArrayList<>();
+        int nbEnfants = 0;
         for (Chasseur chasseur : world.getListeChasseurs()) {
             if (chasseur.getAge() >= 10000) {
                 listeChasseursASupprimer.add(chasseur);
-            } else {
+            } 
+            else if(chasseur.getAge() >= 1000)
+            {
+                Random rnd = new Random();
+                if (rnd.nextDouble() <0.3){
+                    nbEnfants +=1;
+                };
+            }
+            
+            else {
                 if (chasseur.getClasse() == Classe.CITOYEN) {
                     if (chasseur.getAge() >= 200) {
                         ChasseurService.attribuerClasse(chasseur);
@@ -97,6 +108,7 @@ public class UpdateChasseurs {
             }
         }
         supprimerChasseurs(world, listeChasseursASupprimer);
+        naissanceChasseurs(world,nbEnfants);
     }
 
     public static Guilde guildeRecrute (World world) {
@@ -138,6 +150,13 @@ public class UpdateChasseurs {
     public static void supprimerChasseurs (World world, ArrayList <Chasseur> listeChasseursASupprimer) {
         for (Chasseur chasseur : listeChasseursASupprimer) {
             WorldService.tuerChasseur(world, chasseur);
+        }
+    }
+
+    public static void naissanceChasseurs (World world, int nbEnfants) {
+        Chasseur chasseur = new Chasseur("Souli");
+        for (int i = 0; i < nbEnfants; i++) {
+            world.ajouterChasseur(chasseur);
         }
     }
 }
