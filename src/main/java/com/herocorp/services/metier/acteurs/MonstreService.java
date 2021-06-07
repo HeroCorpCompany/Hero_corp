@@ -15,9 +15,9 @@ public class MonstreService {
 
         if (randomInt < 40) {
             classe = Classe.D;
-        } else if (randomInt < 30) {
+        } else if (randomInt < 70) {
             classe = Classe.C;
-        } else if (randomInt < 20) {
+        } else if (randomInt < 90) {
             classe = Classe.B;
         } else if (randomInt < 99) {
             classe = Classe.A;
