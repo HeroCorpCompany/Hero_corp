@@ -30,7 +30,7 @@ public class UpdateChasseurs {
                 if(chasseur.getAge() >= 10)
                 {
                     Random rnd = new Random();
-                    if (rnd.nextDouble() <0.2){
+                    if (rnd.nextDouble() <0.1){
                         nbEnfants +=1;
                     };
                 };
