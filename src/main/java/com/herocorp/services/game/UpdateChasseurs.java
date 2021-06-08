@@ -27,15 +27,15 @@ public class UpdateChasseurs {
             } 
             
             else {
-                if(chasseur.getAge() >= 5)
+                if(chasseur.getAge() >= 10)
                 {
                     Random rnd = new Random();
-                    if (rnd.nextDouble() <0.3){
+                    if (rnd.nextDouble() <0.2){
                         nbEnfants +=1;
                     };
                 };
                 if (chasseur.getClasse() == Classe.CITOYEN) {
-                    if (chasseur.getAge() >= 2) {
+                    if (chasseur.getAge() >= 5) {
                         ChasseurService.attribuerClasse(chasseur);
                     } else {
                         // Attendre
@@ -156,6 +156,8 @@ public class UpdateChasseurs {
 
     public static void naissanceChasseurs (World world, int nbEnfants) {
         Chasseur chasseur = new Chasseur("Souli");
+        Forum forum = new Forum(new Coord(0, 0));
+        ChasseurService.changerLieu(chasseur, forum);
         for (int i = 0; i < nbEnfants; i++) {
             WorldService.ajouterChasseur(world,chasseur);
         }
