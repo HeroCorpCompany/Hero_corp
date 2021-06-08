@@ -37,6 +37,10 @@ public class WorldService {
         return world.supprimerChasseur(chasseurCible);
     }
 
+    public static boolean ajouterChasseur (World world, Chasseur chasseurCible) {
+        return world.ajouterChasseur(chasseurCible);
+    }
+
     public static boolean detruireGroupe (World world, GroupeRaid groupeCible) {
         return world.supprimerGroupe(groupeCible);
     }

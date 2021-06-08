@@ -27,15 +27,15 @@ public class UpdateChasseurs {
             } 
             
             else {
-                if(chasseur.getAge() >= 10)
+                if(chasseur.getAge() >= 5)
                 {
                     Random rnd = new Random();
-                    if (rnd.nextDouble() <0.5){
+                    if (rnd.nextDouble() <0.3){
                         nbEnfants +=1;
                     };
-                }
+                };
                 if (chasseur.getClasse() == Classe.CITOYEN) {
-                    if (chasseur.getAge() >= 5) {
+                    if (chasseur.getAge() >= 2) {
                         ChasseurService.attribuerClasse(chasseur);
                     } else {
                         // Attendre
@@ -107,8 +107,9 @@ public class UpdateChasseurs {
                 }
             }
         }
-        supprimerChasseurs(world, listeChasseursASupprimer);
         naissanceChasseurs(world,nbEnfants);
+        supprimerChasseurs(world, listeChasseursASupprimer);
+        
     }
 
     public static Guilde guildeRecrute (World world) {
@@ -156,7 +157,7 @@ public class UpdateChasseurs {
     public static void naissanceChasseurs (World world, int nbEnfants) {
         Chasseur chasseur = new Chasseur("Souli");
         for (int i = 0; i < nbEnfants; i++) {
-            world.ajouterChasseur(chasseur);
+            WorldService.ajouterChasseur(world,chasseur);
         }
     }
 }

@@ -37,8 +37,8 @@ public class World {
         return this.listeChasseurs;
     }
 
-    public void ajouterChasseur (Chasseur chasseur) {
-        this.listeChasseurs.add(chasseur);
+    public boolean ajouterChasseur (Chasseur chasseur) {
+        return this.listeChasseurs.add(chasseur);
     }
 
     public boolean supprimerChasseur (Chasseur chasseur) {
