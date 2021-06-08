@@ -131,7 +131,7 @@ public class ChasseurDao {
     public static void supprimerChasseur (Connection db, Chasseur chasseur) {
         try {
             Statement st = db.createStatement();
-            String requete = String.format("DELETE Chasseur WHERE idChasseur=%1$d", 
+            String requete = String.format("DELETE FROM Chasseur WHERE idChasseur=%1$d", 
                 chasseur.getId());
             ResultSet rs = st.executeQuery(requete);
             rs.close();

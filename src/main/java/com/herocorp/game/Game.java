@@ -1,8 +1,10 @@
 package com.herocorp.game;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.herocorp.dao.LieuDao;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
@@ -11,6 +13,7 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.game.WorldService;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.lieux.DonjonService;
+import com.herocorp.tools.Connexion;
 import com.herocorp.tools.Coord;
 
 public class Game {
@@ -18,25 +21,25 @@ public class Game {
     private Statistiques stats;
 
     public Game () {
+        Connection db = new Connexion().getConnexion();
         ArrayList <Chasseur> listeChasseurs = new ArrayList<>();
         ArrayList <Donjon> listeDonjons = new ArrayList<>();
         ArrayList <Guilde> listeGuildes = new ArrayList<>();
         HashMap <String, AbstractLieu> mapLieux = new HashMap<>();
         Forum forum = new Forum(new Coord(0, 0));
+        LieuDao.ajouterLieu(db, forum);
         mapLieux.put("Forum", forum);
         for (int i = 0; i < 5; i++) {
-            Donjon donjon = new Donjon(new Coord(0, 0));
-            DonjonService.remplirDonjon(donjon);
+            Donjon donjon = DonjonService.creerDonjon(db, 0, 0);
             listeDonjons.add(donjon);
         }
         for (int i = 0; i < 90; i++) {
-            Chasseur chasseur = new Chasseur("Souli");
-            ChasseurService.attribuerClasse(chasseur);
-            ChasseurService.changerLieu(chasseur, forum);
+            Chasseur chasseur = ChasseurService.creerChasseur(db, "Chasseur " + i, forum);
             listeChasseurs.add(chasseur);
         }
 
         this.world = new World(listeChasseurs, listeDonjons, listeGuildes, mapLieux);
+        this.world.setConnection(db);
         this.stats = new Statistiques(this.world);
     }
 

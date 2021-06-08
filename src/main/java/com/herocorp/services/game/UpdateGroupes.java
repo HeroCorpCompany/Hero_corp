@@ -2,6 +2,9 @@ package com.herocorp.services.game;
 
 import java.util.ArrayList;
 
+import com.herocorp.dao.ChasseurDao;
+import com.herocorp.dao.GroupeDao;
+import com.herocorp.dao.GuildeDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.AbstractActeur;
 import com.herocorp.metier.acteurs.Chasseur;
@@ -32,10 +35,12 @@ public class UpdateGroupes {
                         }
                     if (groupe.hasGuilde()) {
                         groupe.getGuilde().setArgent(groupe.getGuilde().getArgent() + argent);
+                        GuildeDao.majGuilde(world.getDb(), groupe.getGuilde());
                     } else {
                         for (AbstractActeur acteur : groupe.getListe()) {
                             Chasseur chasseur = (Chasseur) acteur;
                             chasseur.agmenterArgent(argent / groupe.getListe().size());
+                            ChasseurDao.majChasseur(world.getDb(), chasseur);
                         }
                     }
                     for (AbstractActeur acteur : groupe.getListe()) {
@@ -47,6 +52,7 @@ public class UpdateGroupes {
                             ForumService.ajouterChasseur((Forum)world.getLieu("Forum"), chasseur);
                         }
                         ChasseurService.quitterRaid(chasseur);
+                        ChasseurDao.majChasseur(world.getDb(), chasseur);
                     }
                     listeGroupesASupprimer.add(groupe);
                     listeDonjonsASupprimer.add(groupe.getCible());
@@ -68,11 +74,13 @@ public class UpdateGroupes {
                     GroupeRaidService.allerDonjon(groupe, groupe.getCible());
                     for (AbstractActeur chasseur : groupe.getListe()) {
                         ChasseurService.changerLieu((Chasseur)chasseur, groupe.getCible());
+                        ChasseurDao.majChasseur(world.getDb(), (Chasseur)chasseur);
                     }
                 } else {
                     // Attendre
                 }
             }
+            GroupeDao.majGroupe(world.getDb(), groupe);
         }
         supprimerChasseurs(world, listeChasseursASupprimer);
         supprimerDonjons(world, listeDonjonsASupprimer);

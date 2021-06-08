@@ -65,7 +65,7 @@ public class GroupeDao {
     public static void supprimerGroupeGuilde (Connection db, GroupeRaid groupe) {
         try {
             Statement st = db.createStatement();
-            String requete = String.format("DELETE FROM GroupeGuilde WHERE idGroupe=%1$d)", 
+            String requete = String.format("DELETE FROM GroupeGuilde WHERE idGroupe=%1$d", 
                 groupe.getId());
             ResultSet rs = st.executeQuery(requete);
             rs.close();
@@ -93,7 +93,7 @@ public class GroupeDao {
     public static void supprimerGroupe (Connection db, GroupeRaid groupe) {
         try {
             Statement st = db.createStatement();
-            String requete = String.format("DELETE FROM Groupe WHERE idGroupe=%1$d)", 
+            String requete = String.format("DELETE FROM Groupe WHERE idGroupe=%1$d", 
                 groupe.getId());
             ResultSet rs = st.executeQuery(requete);
             rs.close();

@@ -1,5 +1,8 @@
 package com.herocorp.services.game;
 
+import com.herocorp.dao.ChasseurDao;
+import com.herocorp.dao.GroupeDao;
+import com.herocorp.dao.LieuDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
@@ -25,18 +28,22 @@ public class WorldService {
     }
 
     public static boolean detruireDonjon (World world, Donjon donjonCible) {
+        LieuDao.supprimerLieu(world.getDb(), donjonCible);
         return world.supprimerDonjon(donjonCible);
     }
 
     public static boolean detruireGuilde (World world, Guilde guildeCible) {
+        LieuDao.supprimerLieu(world.getDb(), guildeCible);
         return world.supprimerGuilde(guildeCible);
     }
 
     public static boolean tuerChasseur (World world, Chasseur chasseurCible) {
+        ChasseurDao.supprimerChasseur(world.getDb(), chasseurCible);
         return world.supprimerChasseur(chasseurCible);
     }
 
     public static boolean detruireGroupe (World world, GroupeRaid groupeCible) {
+        GroupeDao.supprimerGroupe(world.getDb(), groupeCible);
         return world.supprimerGroupe(groupeCible);
     }
 

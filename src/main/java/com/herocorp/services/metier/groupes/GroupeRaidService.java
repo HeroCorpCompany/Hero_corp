@@ -1,14 +1,29 @@
 package com.herocorp.services.metier.groupes;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.herocorp.metier.acteurs.Chasseur;
+import com.herocorp.dao.GroupeDao;
 import com.herocorp.metier.acteurs.AbstractActeur;
 
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.groupes.GroupeMonstres;
+import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
+import com.herocorp.metier.lieux.Guilde;
 
 public class GroupeRaidService {
+
+    public static GroupeRaid creerGroupe (Connection db, Donjon donjon, AbstractLieu lieu, Guilde guilde) {
+        GroupeRaid groupe = new GroupeRaid();
+        groupe.setCible(donjon);
+        groupe.setPosition(lieu);
+        if (guilde != null) {
+            groupe.setGuilde(guilde);
+        }
+        GroupeDao.ajouterGroupe(db, groupe);
+        return groupe;
+    }
     
     public static boolean verifierGroupe (GroupeRaid groupe) {
         // TODO : vérifier la taille du groupe

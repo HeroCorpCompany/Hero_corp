@@ -1,5 +1,6 @@
 package com.herocorp.game;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ import com.herocorp.metier.lieux.Guilde;
 public class World {
 
     private int temps = 0;
+    Connection db;
     private ArrayList <Chasseur> listeChasseurs;
     private ArrayList <Donjon> listeDonjons;
     private ArrayList <Guilde> listeGuildes;
@@ -23,6 +25,14 @@ public class World {
         this.listeDonjons = listeDonjons;
         this.listeGuildes = listeGuildes;
         this.mapLieux = mapLieux;
+    }
+
+    public void setConnection (Connection db) {
+        this.db = db;
+    }
+
+    public Connection getDb() {
+        return this.db;
     }
 
     public int getTemps () {

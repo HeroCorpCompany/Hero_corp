@@ -66,7 +66,7 @@ public class LieuDao {
     public static void supprimerLieu (Connection db, AbstractLieu lieu) {
         try {
             Statement st = db.createStatement();
-            String requete = String.format("DELETE Lieu WHERE idLieu=%1$d", 
+            String requete = String.format("DELETE FROM Lieu WHERE idLieu=%1$d", 
                 lieu.getId());
             ResultSet rs = st.executeQuery(requete);
             rs.close();

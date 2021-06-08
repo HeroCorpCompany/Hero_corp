@@ -2,6 +2,7 @@ package com.herocorp.services.game;
 
 import java.util.ArrayList;
 
+import com.herocorp.dao.ChasseurDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
@@ -39,21 +40,22 @@ public class UpdateChasseurs {
                                 ChasseurService.rejoindreGuilde(chasseur, guilde);
                                 GuildeService.ajouterChasseur(guilde, chasseur);
                                 guilde.setRecrute(false);
+                                ChasseurDao.ajouterChasseurGuilde(world.getDb(), chasseur);
                             } else {
                                 GroupeRaid groupe = groupeDispo(world);
                                 if (groupe != null) {
                                     GroupeRaidService.ajouterChasseur(groupe, chasseur);
                                     ChasseurService.rejoindreRaid(chasseur, groupe);
+                                    ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
                                 } else {
                                     Donjon donjon = donjonLibre(world);
                                     if (donjon != null) {
-                                        GroupeRaid newGroupe = new GroupeRaid();
-                                        newGroupe.setCible(donjon);
+                                        GroupeRaid newGroupe = GroupeRaidService.creerGroupe(world.getDb(), donjon, chasseur.getPosition(), null);
                                         donjon.setGroupeRaid(newGroupe);
                                         ChasseurService.rejoindreRaid(chasseur, newGroupe);
                                         GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
+                                        ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
                                         WorldService.ajouterGroupe(world, newGroupe);
-                                        newGroupe.setPosition(chasseur.getPosition());
                                     } else {
                                         // Attendre
                                     }
@@ -69,17 +71,16 @@ public class UpdateChasseurs {
                                 if (groupe != null) {
                                     GroupeRaidService.ajouterChasseur(groupe, chasseur);
                                     ChasseurService.rejoindreRaid(chasseur, groupe);
+                                    ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
                                 } else {
                                     Donjon donjon = donjonLibre(world);
                                     if (donjon != null) {
-                                        GroupeRaid newGroupe = new GroupeRaid();
-                                        newGroupe.setCible(donjon);
+                                        GroupeRaid newGroupe = GroupeRaidService.creerGroupe(world.getDb(), donjon, chasseur.getPosition(), chasseur.getGuilde());
                                         donjon.setGroupeRaid(newGroupe);
                                         GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
                                         ChasseurService.rejoindreRaid(chasseur, newGroupe);
                                         chasseur.getGuilde().ajouterGroupe(newGroupe);
-                                        newGroupe.setGuilde(chasseur.getGuilde());
-                                        newGroupe.setPosition(chasseur.getPosition());
+                                        ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
                                     } else {
                                         // Attendre, TODO : potentiellement quitter la guilde !
                                     }
@@ -95,6 +96,7 @@ public class UpdateChasseurs {
                     }
                 }
             }
+            //ChasseurDao.majChasseur(world.getDb(), chasseur);
         }
         supprimerChasseurs(world, listeChasseursASupprimer);
     }

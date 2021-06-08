@@ -1,7 +1,9 @@
 package com.herocorp.services.metier.acteurs;
 
+import java.sql.Connection;
 import java.util.Random;
 
+import com.herocorp.dao.ChasseurDao;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.AbstractLieu;
@@ -9,6 +11,14 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.tools.Classe;
 
 public class ChasseurService {
+
+    public static Chasseur creerChasseur (Connection db, String nom, AbstractLieu lieu) {
+        Chasseur chasseur = new Chasseur("Chasseur");
+        ChasseurService.attribuerClasse(chasseur);
+        ChasseurService.changerLieu(chasseur, lieu);
+        ChasseurDao.ajouterChasseur(db, chasseur);
+        return chasseur;
+    }
     
     public static void rejoindreGuilde (Chasseur chasseur, Guilde guilde) {
         chasseur.setGuilde(guilde);
