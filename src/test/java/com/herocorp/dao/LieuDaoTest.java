@@ -2,7 +2,6 @@ package com.herocorp.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import java.net.ConnectException;
 import java.sql.Connection;
 
 import com.herocorp.metier.lieux.Donjon;

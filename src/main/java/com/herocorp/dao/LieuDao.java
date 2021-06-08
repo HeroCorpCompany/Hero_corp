@@ -8,7 +8,6 @@ import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Forum;
 import com.herocorp.metier.lieux.Guilde;
-import com.herocorp.tools.Connexion;
 import com.herocorp.tools.Coord;
 
 public class LieuDao {

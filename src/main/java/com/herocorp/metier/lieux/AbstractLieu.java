@@ -5,7 +5,6 @@ import com.herocorp.tools.Coord;
 
 public class AbstractLieu {
     
-    private static int dernierId = 0;
     private int id;
     private String nom;
     private Coord coord;

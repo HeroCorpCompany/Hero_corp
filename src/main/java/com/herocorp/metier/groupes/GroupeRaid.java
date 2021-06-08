@@ -10,9 +10,18 @@ public class GroupeRaid extends GroupeChasseurs {
 
     private Guilde guilde = null;
     private Donjon cible = null;
+    private int id = 0;
     
     public GroupeRaid () {
         super ();
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean hasGuilde () {
