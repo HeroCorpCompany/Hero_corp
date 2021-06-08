@@ -61,5 +61,19 @@ public class MonstreDao {
         }
         return null;
     }
+
+    public static void supprimerMonstre (Connection db, Monstre monstre) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE Monstre WHERE idMonstre=%1$d", 
+                monstre.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
 }

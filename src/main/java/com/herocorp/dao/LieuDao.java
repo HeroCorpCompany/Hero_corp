@@ -63,5 +63,19 @@ public class LieuDao {
         return null;
     }
 
+    public static void supprimerLieu (Connection db, AbstractLieu lieu) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE Lieu WHERE idLieu=%1$d", 
+                lieu.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }

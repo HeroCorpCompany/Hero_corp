@@ -46,4 +46,32 @@ public class GuildeDao {
         }
         return null;
     }
+
+    public static void majGuilde (Connection db, Guilde guilde) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("UPDATE Guilde SET argent=%1$d, recrute=%2$b WHERE idGuilde=%3$d", 
+                guilde.getArgent(), guilde.isRecruting(), guilde.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void supprimerGuilde (Connection db, Guilde guilde) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE Guilde WHERE idGuilde=%1$d", 
+                guilde.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

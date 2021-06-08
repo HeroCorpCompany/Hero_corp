@@ -1,13 +1,11 @@
 package com.herocorp.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.Forum;
-import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.tools.Connexion;
 import com.herocorp.tools.Coord;
 

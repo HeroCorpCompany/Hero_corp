@@ -19,6 +19,9 @@ public class GroupeDao {
             groupe.setId(id);
             rs.close();
             st.close();
+            if (groupe.hasGuilde()) {
+                ajouterGroupeGuilde(db, groupe);
+            }
         }
         catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
@@ -43,5 +46,61 @@ public class GroupeDao {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public static void ajouterGroupeGuilde (Connection db, GroupeRaid groupe) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("INSERT INTO GroupeGuilde(idGroupe, idGuilde) VALUES (%1$d, %2$d)", 
+                groupe.getId(), groupe.getGuilde().getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void supprimerGroupeGuilde (Connection db, GroupeRaid groupe) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE FROM GroupeGuilde WHERE idGroupe=%1$d)", 
+                groupe.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void majGroupe (Connection db, GroupeRaid groupe) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("UPDATE Groupe SET idLieu=%1$d WHERE idGroupe=%2$d", 
+                groupe.getPosition().getId(), groupe.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void supprimerGroupe (Connection db, GroupeRaid groupe) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE FROM Groupe WHERE idGroupe=%1$d)", 
+                groupe.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

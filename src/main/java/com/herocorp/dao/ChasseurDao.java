@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.herocorp.metier.acteurs.Chasseur;
-import com.herocorp.tools.Connexion;
 
 
 public class ChasseurDao {
@@ -21,6 +20,12 @@ public class ChasseurDao {
             chasseur.setId(id);
             rs.close();
             st.close();
+            if (chasseur.isInGuilde()) {
+                ajouterChasseurGuilde(db, chasseur);
+            }
+            if (chasseur.isInGroupe()) {
+                ajouterChasseurGroupe(db, chasseur);
+            }
         }
         catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
@@ -52,14 +57,83 @@ public class ChasseurDao {
         return null;
     }
 
-    public static void majChasseur (Chasseur chasseur) {
+
+    public static void ajouterChasseurGuilde (Connection db, Chasseur chasseur) {
         try {
-            Connection db = new Connexion().getConnexion();
             Statement st = db.createStatement();
-            String requete = String.format("UPDATE Chasseur SET (argent=%1$d, idPosition=%2$s, classe=%3$s) WHERE idChasseur=%4$s", 
-                chasseur.getArgent(), chasseur.getPosition().getId(), chasseur.getClasse().getNom(), chasseur.getId());
+            String requete = String.format("INSERT INTO ChasseurGuilde(idChasseur, idGuilde) VALUES (%1$d, %2$d)", 
+                chasseur.getId(), chasseur.getGuilde().getId());
             ResultSet rs = st.executeQuery(requete);
-            System.out.println("Requête exécutée");
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void ajouterChasseurGroupe (Connection db, Chasseur chasseur) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("INSERT INTO GroupeChasseur(idChasseur, idGroupe) VALUES (%1$d, %2$d)", 
+                chasseur.getId(), chasseur.getGroupe().getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void supprimerChasseurGroupe (Connection db, Chasseur chasseur) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE FROM GroupeChasseur WHERE idChasseur=%1$d)", 
+                chasseur.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    } 
+
+    public static void supprimerChasseurGuilde (Connection db, Chasseur chasseur) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE FROM ChasseurGuilde WHERE idChasseur=%1$d)", 
+                chasseur.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void majChasseur (Connection db, Chasseur chasseur) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("UPDATE Chasseur SET age=%1$d, argent=%2$d, idLieu=%3$d, classe='%4$s', salaire=%5$d WHERE idChasseur=%6$d", 
+                chasseur.getAge(), chasseur.getArgent(), chasseur.getPosition().getId(), chasseur.getClasse().getNom(), chasseur.getClasse().getSalaire(), chasseur.getId());
+            ResultSet rs = st.executeQuery(requete);
+            rs.close();
+            st.close();
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void supprimerChasseur (Connection db, Chasseur chasseur) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("DELETE Chasseur WHERE idChasseur=%1$d", 
+                chasseur.getId());
+            ResultSet rs = st.executeQuery(requete);
             rs.close();
             st.close();
         }
