@@ -11,6 +11,7 @@ public class Donjon extends AbstractLieu {
 
     public Donjon (Coord coord) {
         super ("Donjon" , coord);
+        this.setType("Donjon");
     }
 
     public GroupeMonstres getGroupeMonstres () {

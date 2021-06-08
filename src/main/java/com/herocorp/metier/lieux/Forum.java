@@ -10,6 +10,7 @@ public class Forum extends AbstractLieu {
 
     public Forum (Coord coord) {
         super ("Forum", coord);
+        this.setType("Forum");
     }
 
     public GroupeChasseurs getMembres () {

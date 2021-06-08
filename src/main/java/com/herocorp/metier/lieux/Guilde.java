@@ -16,6 +16,7 @@ public class Guilde extends AbstractLieu {
 
     public Guilde (Coord coord) {
         super ("Guilde", coord);
+        this.setType("Guilde");
     }
 
     public GroupeChasseurs getMembres () {
