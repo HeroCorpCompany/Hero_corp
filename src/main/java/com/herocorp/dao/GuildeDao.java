@@ -14,8 +14,7 @@ public class GuildeDao {
             Statement st = db.createStatement();
             String requete = String.format("INSERT INTO Guilde(idGuilde, argent, recrute) VALUES (%1$d, %2$d, %3$b)", 
                 guilde.getId(), guilde.getArgent(), guilde.isRecruting());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -52,8 +51,7 @@ public class GuildeDao {
             Statement st = db.createStatement();
             String requete = String.format("UPDATE Guilde SET argent=%1$d, recrute=%2$b WHERE idGuilde=%3$d", 
                 guilde.getArgent(), guilde.isRecruting(), guilde.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -66,8 +64,7 @@ public class GuildeDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE Guilde WHERE idGuilde=%1$d", 
                 guilde.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {

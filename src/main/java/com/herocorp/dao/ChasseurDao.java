@@ -63,8 +63,7 @@ public class ChasseurDao {
             Statement st = db.createStatement();
             String requete = String.format("INSERT INTO ChasseurGuilde(idChasseur, idGuilde) VALUES (%1$d, %2$d)", 
                 chasseur.getId(), chasseur.getGuilde().getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -77,8 +76,7 @@ public class ChasseurDao {
             Statement st = db.createStatement();
             String requete = String.format("INSERT INTO GroupeChasseur(idChasseur, idGroupe) VALUES (%1$d, %2$d)", 
                 chasseur.getId(), chasseur.getGroupe().getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -91,8 +89,7 @@ public class ChasseurDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE FROM GroupeChasseur WHERE idChasseur=%1$d)", 
                 chasseur.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -105,8 +102,7 @@ public class ChasseurDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE FROM ChasseurGuilde WHERE idChasseur=%1$d)", 
                 chasseur.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -119,8 +115,7 @@ public class ChasseurDao {
             Statement st = db.createStatement();
             String requete = String.format("UPDATE Chasseur SET age=%1$d, argent=%2$d, idLieu=%3$d, classe='%4$s', salaire=%5$d WHERE idChasseur=%6$d", 
                 chasseur.getAge(), chasseur.getArgent(), chasseur.getPosition().getId(), chasseur.getClasse().getNom(), chasseur.getClasse().getSalaire(), chasseur.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -133,8 +128,7 @@ public class ChasseurDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE FROM Chasseur WHERE idChasseur=%1$d", 
                 chasseur.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {

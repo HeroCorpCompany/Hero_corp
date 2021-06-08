@@ -67,8 +67,7 @@ public class MonstreDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE Monstre WHERE idMonstre=%1$d", 
                 monstre.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {

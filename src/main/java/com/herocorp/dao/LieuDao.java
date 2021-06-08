@@ -68,8 +68,7 @@ public class LieuDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE FROM Lieu WHERE idLieu=%1$d", 
                 lieu.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {

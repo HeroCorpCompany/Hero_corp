@@ -53,8 +53,7 @@ public class GroupeDao {
             Statement st = db.createStatement();
             String requete = String.format("INSERT INTO GroupeGuilde(idGroupe, idGuilde) VALUES (%1$d, %2$d)", 
                 groupe.getId(), groupe.getGuilde().getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -67,8 +66,7 @@ public class GroupeDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE FROM GroupeGuilde WHERE idGroupe=%1$d", 
                 groupe.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -81,8 +79,7 @@ public class GroupeDao {
             Statement st = db.createStatement();
             String requete = String.format("UPDATE Groupe SET idLieu=%1$d WHERE idGroupe=%2$d", 
                 groupe.getPosition().getId(), groupe.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
@@ -95,8 +92,7 @@ public class GroupeDao {
             Statement st = db.createStatement();
             String requete = String.format("DELETE FROM Groupe WHERE idGroupe=%1$d", 
                 groupe.getId());
-            ResultSet rs = st.executeQuery(requete);
-            rs.close();
+            st.execute(requete);
             st.close();
         }
         catch (java.sql.SQLException e) {
