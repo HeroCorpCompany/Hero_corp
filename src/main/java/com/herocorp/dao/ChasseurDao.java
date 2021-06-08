@@ -10,14 +10,12 @@ import com.herocorp.tools.Connexion;
 
 public class ChasseurDao {
 
-    public static void ajouterChasseur (Chasseur chasseur) {
+    public static void ajouterChasseur (Connection db, Chasseur chasseur) {
         try {
-            Connection db = new Connexion().getConnexion();
             Statement st = db.createStatement();
-            String requete = String.format("INSERT INTO Chasseur VALUES (%1$s, %2$d, %3$s, %4$s)", 
-                chasseur.getNom(), chasseur.getArgent(), chasseur.getPosition().getId(), chasseur.getClasse().getNom());
+            String requete = String.format("INSERT INTO Chasseur(nom, age, argent, idLieu, classe, salaire) VALUES ('%1$s', %2$d, %3$d, %4$d, '%5$s', %6$d) RETURNING idChasseur", 
+                chasseur.getNom(), chasseur.getAge(), chasseur.getArgent(), chasseur.getPosition().getId(), chasseur.getClasse().getNom(), chasseur.getClasse().getSalaire());
             ResultSet rs = st.executeQuery(requete);
-            System.out.println("Requête exécutée");
             rs.next();
             int id = rs.getInt("idChasseur");
             chasseur.setId(id);
@@ -27,6 +25,31 @@ public class ChasseurDao {
         catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static Chasseur recupererChaseur (Connection db, int idChasseur) {
+        try {
+            Statement st = db.createStatement();
+            String requete = String.format("SELECT * FROM Chasseur WHERE idChasseur=%1$d", 
+                idChasseur);
+            ResultSet rs = st.executeQuery(requete);
+            rs.next();
+            int id = rs.getInt("idChasseur");
+            String nom = rs.getString("nom");
+            int argent = rs.getInt("argent");
+            int age = rs.getInt("age");
+            rs.close();
+            st.close();
+            Chasseur chasseur = new Chasseur(nom);
+            chasseur.setId(id);
+            chasseur.setArgent(argent);
+            chasseur.setAge(age);
+            return chasseur;
+        }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public static void majChasseur (Chasseur chasseur) {

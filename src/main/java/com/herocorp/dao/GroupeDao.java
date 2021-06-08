@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.herocorp.metier.groupes.GroupeRaid;
-import com.herocorp.tools.Connexion;
 
 public class GroupeDao {
     
