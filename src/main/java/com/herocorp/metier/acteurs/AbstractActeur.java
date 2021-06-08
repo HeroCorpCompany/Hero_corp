@@ -4,7 +4,7 @@ import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.tools.Classe;
 
 public abstract class AbstractActeur {
-    private String id = "0";
+    private int id = 0;
     private String nom;
     private Classe classe;
     private AbstractLieu position = null;
@@ -18,11 +18,11 @@ public abstract class AbstractActeur {
         return this.nom;
     }
 
-    public String getId () {
+    public int getId () {
         return this.id;
     }
 
-    public void setId (String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

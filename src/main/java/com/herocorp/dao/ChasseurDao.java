@@ -18,7 +18,8 @@ public class ChasseurDao {
                 chasseur.getNom(), chasseur.getArgent(), chasseur.getPosition().getId(), chasseur.getClasse().getNom());
             ResultSet rs = st.executeQuery(requete);
             System.out.println("Requête exécutée");
-            String id = rs.getString("idChasseur");
+            rs.next();
+            int id = rs.getInt("idChasseur");
             chasseur.setId(id);
             rs.close();
             st.close();
