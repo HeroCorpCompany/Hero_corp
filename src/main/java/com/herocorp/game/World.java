@@ -24,7 +24,7 @@ public class World {
     private int ageChasseurReproduction = 5;
     private int nbGuildeSeuil = 5;
     private int nbDonjonSeuils = 9;
-    private double chanceReproduction = 0.3;
+    private double chanceReproduction = 0.6;
 
 
     public World (ArrayList <Chasseur> listeChasseurs, ArrayList <Donjon> listeDonjons, ArrayList <Guilde> listeGuildes, HashMap <String, AbstractLieu> mapLieux) {
