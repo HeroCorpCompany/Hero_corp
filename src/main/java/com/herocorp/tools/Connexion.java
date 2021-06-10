@@ -10,8 +10,8 @@ public class Connexion {
    public Connexion() {
       try {
         Class.forName("org.postgresql.Driver");
-         this.connexion = DriverManager.getConnection("jdbc:postgresql://tai.db.elephantsql.com/ducwymls",
-            "ducwymls", "gbWCeCBcQIDu1xMGTck46h4-KjzrBBXY");
+         this.connexion = DriverManager.getConnection("jdbc:postgresql://tai.db.elephantsql.com/vmgplssn",
+            "vmgplssn", "fF69eX1OPGpUWbKUyYJVmxoXLDNDrb1C");
       } catch (Exception e) {
          e.printStackTrace();
          System.err.println(e.getClass().getName()+": "+e.getMessage());

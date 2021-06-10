@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.herocorp.dao.LieuDao;
+import com.herocorp.dao.WorldDao;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.AbstractLieu;
 import com.herocorp.metier.lieux.Donjon;
@@ -36,7 +37,7 @@ public class Game {
             Donjon donjon = DonjonService.creerDonjon(db);
             listeDonjons.add(donjon);
         }
-        for (int i = 0; i < 90; i++) {
+        for (int i = 0; i < 200; i++) {
             Chasseur chasseur = ChasseurService.creerChasseur(db, "Chasseur " + i, forum);
             listeChasseurs.add(chasseur);
         }
@@ -45,6 +46,7 @@ public class Game {
         this.world.setConnection(db);
         setVariablesWorld(this.world, nbIteration);
         this.stats = new Statistiques(this.world);
+        WorldDao.initialiserStats(world.getDb(), world);
     }
 
     public Game (World world) {

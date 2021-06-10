@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.Random;
 
 import com.herocorp.dao.GuildeDao;
+import com.herocorp.dao.LieuDao;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.tools.Coord;
@@ -15,8 +16,9 @@ public class GuildeService {
         int x = rnd.nextInt(28);
         int y = rnd.nextInt(24);
         Guilde guilde = new Guilde(new Coord(x, y));
-        int randomArgent = rnd.nextInt(10000);
+        int randomArgent = rnd.nextInt(3000);
         guilde.setArgent(randomArgent);
+        LieuDao.ajouterLieu(db, guilde);
         GuildeDao.ajouterGuilde(db, guilde);
         return guilde;
     }

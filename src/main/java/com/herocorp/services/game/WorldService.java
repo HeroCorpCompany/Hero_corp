@@ -4,6 +4,7 @@ import com.herocorp.dao.ChasseurDao;
 import com.herocorp.dao.GroupeDao;
 import com.herocorp.dao.GuildeDao;
 import com.herocorp.dao.LieuDao;
+import com.herocorp.dao.WorldDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
@@ -29,6 +30,7 @@ public class WorldService {
         UpdateGuildes.updateGuildes(world);
         WorldService.updateTemps(world);
         UpdateDonjons.updateDonjons(world);
+        WorldDao.majStats(world.getDb(), world);
     }
 
 
