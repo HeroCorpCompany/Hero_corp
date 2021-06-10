@@ -1,6 +1,7 @@
 package com.herocorp.services.metier.lieux;
 
 import java.sql.Connection;
+import java.util.Random;
 
 import com.herocorp.dao.LieuDao;
 import com.herocorp.dao.MonstreDao;
@@ -13,7 +14,10 @@ import com.herocorp.metier.lieux.Donjon;
 
 public class DonjonService {
 
-    public static Donjon creerDonjon (Connection db, int x, int y) {
+    public static Donjon creerDonjon (Connection db) {
+        Random rnd = new Random();
+        int x = rnd.nextInt(20);
+        int y = rnd.nextInt(20);
         Donjon donjon = new Donjon(new Coord(x, y));
         LieuDao.ajouterLieu(db, donjon);
         DonjonService.remplirDonjon(donjon);

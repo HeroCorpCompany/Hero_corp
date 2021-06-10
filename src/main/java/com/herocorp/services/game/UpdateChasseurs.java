@@ -13,7 +13,6 @@ import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.services.metier.lieux.ForumService;
-import com.herocorp.services.metier.lieux.GuildeService;
 import com.herocorp.tools.Classe;
 import com.herocorp.tools.Coord;
 
@@ -48,24 +47,17 @@ public class UpdateChasseurs {
                         } else {
                             Guilde guilde = guildeRecrute(world);
                             if (guilde != null) {
-                                ChasseurService.rejoindreGuilde(chasseur, guilde);
-                                GuildeService.ajouterChasseur(guilde, chasseur);
-                                guilde.setRecrute(false);
-                                ChasseurDao.ajouterChasseurGuilde(world.getDb(), chasseur);
+                                WorldService.ajouterChasseurGuilde(world, chasseur, guilde);
                             } else {
                                 GroupeRaid groupe = groupeDispo(world);
                                 if (groupe != null) {
-                                    GroupeRaidService.ajouterChasseur(groupe, chasseur);
-                                    ChasseurService.rejoindreRaid(chasseur, groupe);
-                                    ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
+                                    WorldService.ajouterChasseurGroupe(world, chasseur, groupe);
                                 } else {
                                     Donjon donjon = donjonLibre(world);
                                     if (donjon != null) {
                                         GroupeRaid newGroupe = GroupeRaidService.creerGroupe(world.getDb(), donjon, chasseur.getPosition(), null);
                                         donjon.setGroupeRaid(newGroupe);
-                                        ChasseurService.rejoindreRaid(chasseur, newGroupe);
-                                        GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
-                                        ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
+                                        WorldService.ajouterChasseurGroupe(world, chasseur, newGroupe);
                                         WorldService.ajouterGroupe(world, newGroupe);
                                     } else {
                                         // Attendre
@@ -80,25 +72,20 @@ public class UpdateChasseurs {
                             } else {
                                 GroupeRaid groupe = groupeDispoGuilde(chasseur.getGuilde());
                                 if (groupe != null) {
-                                    GroupeRaidService.ajouterChasseur(groupe, chasseur);
-                                    ChasseurService.rejoindreRaid(chasseur, groupe);
-                                    ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
+                                    WorldService.ajouterChasseurGroupe(world, chasseur, groupe);
                                 } else {
                                     Donjon donjon = donjonLibre(world);
                                     if (donjon != null) {
                                         GroupeRaid newGroupe = GroupeRaidService.creerGroupe(world.getDb(), donjon, chasseur.getPosition(), chasseur.getGuilde());
                                         donjon.setGroupeRaid(newGroupe);
-                                        GroupeRaidService.ajouterChasseur(newGroupe, chasseur);
-                                        ChasseurService.rejoindreRaid(chasseur, newGroupe);
+                                        WorldService.ajouterChasseurGroupe(world, chasseur, newGroupe);
                                         chasseur.getGuilde().ajouterGroupe(newGroupe);
-                                        ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
                                     } else {
                                         // Attendre, TODO : potentiellement quitter la guilde !
                                     }
                                 }
                             }
                         } else {
-                            GuildeService.retirerChasseur((Guilde) chasseur.getPosition(), chasseur);
                             ChasseurService.changerLieu(chasseur, world.getLieu("Forum"));
                             ForumService.ajouterChasseur((Forum) world.getLieu("Forum"), chasseur);
                         }
@@ -107,7 +94,7 @@ public class UpdateChasseurs {
                     }
                 }
             }
-            //ChasseurDao.majChasseur(world.getDb(), chasseur);
+            ChasseurDao.majChasseur(world.getDb(), chasseur);
         }
         naissanceChasseurs(world,nbEnfants);
         supprimerChasseurs(world, listeChasseursASupprimer);
@@ -157,10 +144,9 @@ public class UpdateChasseurs {
     }
 
     public static void naissanceChasseurs (World world, int nbEnfants) {
-        Chasseur chasseur = new Chasseur("Souli");
-        Forum forum = new Forum(new Coord(0, 0));
-        ChasseurService.changerLieu(chasseur, forum);
+        Forum forum = (Forum) world.getLieu("Forum");
         for (int i = 0; i < nbEnfants; i++) {
+            Chasseur chasseur = ChasseurService.creerChasseur(world.getDb(), "Souli", forum);
             WorldService.ajouterChasseur(world,chasseur);
         }
     }

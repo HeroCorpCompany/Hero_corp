@@ -3,7 +3,6 @@ package com.herocorp.services.game;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.herocorp.dao.ChasseurDao;
 import com.herocorp.dao.GuildeDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.AbstractActeur;
@@ -11,7 +10,6 @@ import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.lieux.GuildeService;
 import com.herocorp.tools.Classe;
-import com.herocorp.tools.Coord;
 
 public class UpdateGuildes {
     
@@ -30,9 +28,7 @@ public class UpdateGuildes {
                 if (world.getTemps()%20 == 0) {
                     for (AbstractActeur acteur : guilde.getMembres().getListe()) {
                         Chasseur chasseur = (Chasseur) acteur;
-                        guilde.setArgent(guilde.getArgent() - chasseur.getSalaire());
-                        chasseur.setArgent(chasseur.getArgent() + chasseur.getSalaire());
-                        ChasseurDao.majChasseur(world.getDb(), chasseur);
+                        WorldService.guildePayeChasseur(world, chasseur, guilde);
                     }
                 }
                 recrutement(world, guilde);
@@ -55,9 +51,7 @@ public class UpdateGuildes {
         Random r = new Random();
         int newGuilde = r.nextInt(6); 
         for (int i = 0; i < newGuilde; i++){
-            Guilde guilde = new Guilde(new Coord(0, 0));
-            int randomArgent = r.nextInt(50);
-            guilde.setArgent(randomArgent);
+            Guilde guilde = GuildeService.creerGuilde(world.getDb());
             world.ajouterGuilde(guilde);
         };
     }

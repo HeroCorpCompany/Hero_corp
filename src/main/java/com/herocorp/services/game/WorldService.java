@@ -2,12 +2,16 @@ package com.herocorp.services.game;
 
 import com.herocorp.dao.ChasseurDao;
 import com.herocorp.dao.GroupeDao;
+import com.herocorp.dao.GuildeDao;
 import com.herocorp.dao.LieuDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.services.metier.acteurs.ChasseurService;
+import com.herocorp.services.metier.groupes.GroupeRaidService;
+import com.herocorp.services.metier.lieux.GuildeService;
 
 public class WorldService {
     
@@ -54,5 +58,39 @@ public class WorldService {
 
     public static void ajouterGroupe (World world, GroupeRaid groupe) {
         world.ajouterGroupe(groupe);
+    }
+
+    public static void ajouterChasseurGuilde(World world, Chasseur chasseur, Guilde guilde) {
+        ChasseurService.rejoindreGuilde(chasseur, guilde);
+        GuildeService.ajouterChasseur(guilde, chasseur);
+        guilde.setRecrute(false);
+        ChasseurDao.ajouterChasseurGuilde(world.getDb(), chasseur);
+    }
+
+    public static void ajouterChasseurGroupe(World world, Chasseur chasseur, GroupeRaid groupe) {
+        GroupeRaidService.ajouterChasseur(groupe, chasseur);
+        ChasseurService.rejoindreRaid(chasseur, groupe);
+        ChasseurDao.ajouterChasseurGroupe(world.getDb(), chasseur);
+    }
+
+    public static void recompenseGuilde(World world, Guilde guilde, int argent) {
+        guilde.setArgent(guilde.getArgent() + argent);
+        GuildeDao.majGuilde(world.getDb(), guilde);
+    }
+
+    public static void recompenseChasseur(World world, Chasseur chasseur, int argent) {
+        chasseur.agmenterArgent(argent);
+        ChasseurDao.majChasseur(world.getDb(), chasseur);
+    }
+
+    public static void retirerChasseurGroupe(World world, Chasseur chasseur) {
+        ChasseurService.quitterRaid(chasseur);
+        ChasseurDao.majChasseur(world.getDb(), chasseur);
+    }
+
+    public static void guildePayeChasseur(World world, Chasseur chasseur, Guilde guilde) {
+        guilde.setArgent(guilde.getArgent() - chasseur.getSalaire());
+        chasseur.setArgent(chasseur.getArgent() + chasseur.getSalaire());
+        ChasseurDao.majChasseur(world.getDb(), chasseur);
     }
 }

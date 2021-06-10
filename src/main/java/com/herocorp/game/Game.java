@@ -33,7 +33,7 @@ public class Game {
         LieuDao.ajouterLieu(db, forum);
         mapLieux.put("Forum", forum);
         for (int i = 0; i < 5; i++) {
-            Donjon donjon = DonjonService.creerDonjon(db, 0, 0);
+            Donjon donjon = DonjonService.creerDonjon(db);
             listeDonjons.add(donjon);
         }
         for (int i = 0; i < 90; i++) {

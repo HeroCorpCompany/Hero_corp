@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.herocorp.dao.ChasseurDao;
 import com.herocorp.dao.GroupeDao;
-import com.herocorp.dao.GuildeDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.AbstractActeur;
 import com.herocorp.metier.acteurs.Chasseur;
@@ -12,6 +11,7 @@ import com.herocorp.metier.acteurs.Monstre;
 import com.herocorp.metier.groupes.GroupeRaid;
 import com.herocorp.metier.lieux.Donjon;
 import com.herocorp.metier.lieux.Forum;
+import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.groupes.GroupeRaidService;
 import com.herocorp.services.metier.lieux.ForumService;
@@ -21,7 +21,6 @@ import com.herocorp.tools.Coord;
 public class UpdateGroupes {
 
     public static void updateGroupes ( World world ) {
-        // TODO : voir arbre groupes
         ArrayList <GroupeRaid> listeGroupesASupprimer = new ArrayList<>();
         ArrayList <Chasseur> listeChasseursASupprimer = new ArrayList<>();
         ArrayList <Donjon> listeDonjonsASupprimer = new ArrayList<>();
@@ -34,13 +33,13 @@ public class UpdateGroupes {
                             argent += monstre.getClasse().getRecompense();
                         }
                     if (groupe.hasGuilde()) {
-                        groupe.getGuilde().setArgent(groupe.getGuilde().getArgent() + argent);
-                        GuildeDao.majGuilde(world.getDb(), groupe.getGuilde());
+                        Guilde guilde = groupe.getGuilde();
+                        WorldService.recompenseGuilde(world, guilde, argent);
                     } else {
                         for (AbstractActeur acteur : groupe.getListe()) {
                             Chasseur chasseur = (Chasseur) acteur;
-                            chasseur.agmenterArgent(argent / groupe.getListe().size());
-                            ChasseurDao.majChasseur(world.getDb(), chasseur);
+                            int argentChasseur = argent / groupe.getListe().size();
+                            WorldService.recompenseChasseur(world, chasseur, argentChasseur);
                         }
                     }
                     for (AbstractActeur acteur : groupe.getListe()) {
@@ -51,8 +50,8 @@ public class UpdateGroupes {
                             ChasseurService.changerLieu(chasseur, world.getLieu("Forum"));
                             ForumService.ajouterChasseur((Forum)world.getLieu("Forum"), chasseur);
                         }
-                        ChasseurService.quitterRaid(chasseur);
-                        ChasseurDao.majChasseur(world.getDb(), chasseur);
+                        WorldService.retirerChasseurGroupe(world, chasseur);
+                        
                     }
                     listeGroupesASupprimer.add(groupe);
                     listeDonjonsASupprimer.add(groupe.getCible());
