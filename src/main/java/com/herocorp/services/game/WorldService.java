@@ -14,6 +14,9 @@ public class WorldService {
     public static void updateTemps (World world) {
         int tempsActuel = world.getTemps();
         world.setTemps(tempsActuel + 1);
+        for (Chasseur chasseur : world.getListeChasseurs()) {
+            chasseur.setAge(chasseur.getAge()+1);
+        }
     }
 
     public static void updateWorld (World world) {
@@ -21,11 +24,9 @@ public class WorldService {
         UpdateGroupes.updateGroupes(world);
         UpdateGuildes.updateGuildes(world);
         WorldService.updateTemps(world);
+        UpdateDonjons.updateDonjons(world);
     }
 
-    public static void genererDonjons (World world) {
-        // TODO : générer un nombre aléatoire de donjons et les ajouter à la liste des donjons
-    }
 
     public static boolean detruireDonjon (World world, Donjon donjonCible) {
         LieuDao.supprimerLieu(world.getDb(), donjonCible);
@@ -40,6 +41,10 @@ public class WorldService {
     public static boolean tuerChasseur (World world, Chasseur chasseurCible) {
         ChasseurDao.supprimerChasseur(world.getDb(), chasseurCible);
         return world.supprimerChasseur(chasseurCible);
+    }
+
+    public static boolean ajouterChasseur (World world, Chasseur chasseurCible) {
+        return world.ajouterChasseur(chasseurCible);
     }
 
     public static boolean detruireGroupe (World world, GroupeRaid groupeCible) {

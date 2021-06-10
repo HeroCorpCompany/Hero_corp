@@ -1,6 +1,7 @@
 package com.herocorp.services.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.herocorp.dao.ChasseurDao;
 import com.herocorp.dao.GuildeDao;
@@ -10,12 +11,15 @@ import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.Guilde;
 import com.herocorp.services.metier.lieux.GuildeService;
 import com.herocorp.tools.Classe;
-
+import com.herocorp.tools.Coord;
 
 public class UpdateGuildes {
     
     public static void updateGuildes ( World world ) {
         ArrayList<Guilde> listeGuildes = world.getListeGuildes();
+        if (listeGuildes.size() < world.getNbGuildeSeuil()) {
+            genererGuildes(world);
+        }
         for (int i = 0; i < listeGuildes.size(); i++) {
             Guilde guilde = listeGuildes.get(i);
             if (guilde.getArgent() < 0) {
@@ -44,5 +48,17 @@ public class UpdateGuildes {
         else {
             guilde.setRecrute(false);
         }
+    }
+
+
+    public static void genererGuildes (World world) {
+        Random r = new Random();
+        int newGuilde = r.nextInt(6); 
+        for (int i = 0; i < newGuilde; i++){
+            Guilde guilde = new Guilde(new Coord(0, 0));
+            int randomArgent = r.nextInt(50);
+            guilde.setArgent(randomArgent);
+            world.ajouterGuilde(guilde);
+        };
     }
 }

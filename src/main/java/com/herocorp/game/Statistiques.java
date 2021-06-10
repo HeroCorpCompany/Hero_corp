@@ -9,8 +9,9 @@ public class Statistiques {
 
     @Override
     public String toString () {
-        return String.format("Nombre de chasseurs : " + world.getListeChasseurs().size() + "\n" +
+        return String.format("Temps actuel : " + world.getTemps() + "\n" +
+                            "Nombre de chasseurs : " + world.getListeChasseurs().size() + "\n" +
                              "Nombre de Donjons : " + world.getListeDonjons().size() + "\n" +
-                             "Nombre de Guildes : " + world.getListeGuildes().size());
+                             "Nombre de Guildes : " + world.getListeGuildes().size() + "\n" );
     }
 }

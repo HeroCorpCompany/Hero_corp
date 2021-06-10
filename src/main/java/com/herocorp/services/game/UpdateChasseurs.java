@@ -1,6 +1,7 @@
 package com.herocorp.services.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.herocorp.dao.ChasseurDao;
 import com.herocorp.game.World;
@@ -20,12 +21,22 @@ public class UpdateChasseurs {
     
     public static void updateChasseurs (World world) {
         ArrayList <Chasseur> listeChasseursASupprimer = new ArrayList<>();
+        int nbEnfants = 0;
         for (Chasseur chasseur : world.getListeChasseurs()) {
-            if (chasseur.getAge() >= 10000) {
+            if (chasseur.getAge() >= world.getAgeChasseurMort()) {
                 listeChasseursASupprimer.add(chasseur);
-            } else {
+            } 
+            
+            else {
+                if(chasseur.getAge() >= world.getAgeChasseurReproduction())
+                {
+                    Random rnd = new Random();
+                    if (rnd.nextDouble() <world.getChanceReproduction()){
+                        nbEnfants +=1;
+                    };
+                };
                 if (chasseur.getClasse() == Classe.CITOYEN) {
-                    if (chasseur.getAge() >= 200) {
+                    if (chasseur.getAge() >= world.getAgeChasseurClasse()) {
                         ChasseurService.attribuerClasse(chasseur);
                     } else {
                         // Attendre
@@ -98,7 +109,9 @@ public class UpdateChasseurs {
             }
             //ChasseurDao.majChasseur(world.getDb(), chasseur);
         }
+        naissanceChasseurs(world,nbEnfants);
         supprimerChasseurs(world, listeChasseursASupprimer);
+        
     }
 
     public static Guilde guildeRecrute (World world) {
@@ -140,6 +153,15 @@ public class UpdateChasseurs {
     public static void supprimerChasseurs (World world, ArrayList <Chasseur> listeChasseursASupprimer) {
         for (Chasseur chasseur : listeChasseursASupprimer) {
             WorldService.tuerChasseur(world, chasseur);
+        }
+    }
+
+    public static void naissanceChasseurs (World world, int nbEnfants) {
+        Chasseur chasseur = new Chasseur("Souli");
+        Forum forum = new Forum(new Coord(0, 0));
+        ChasseurService.changerLieu(chasseur, forum);
+        for (int i = 0; i < nbEnfants; i++) {
+            WorldService.ajouterChasseur(world,chasseur);
         }
     }
 }
