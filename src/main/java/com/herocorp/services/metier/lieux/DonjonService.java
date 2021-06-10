@@ -16,8 +16,8 @@ public class DonjonService {
 
     public static Donjon creerDonjon (Connection db) {
         Random rnd = new Random();
-        int x = rnd.nextInt(40);
-        int y = rnd.nextInt(26);
+        int x = rnd.nextInt(28);
+        int y = rnd.nextInt(24);
         Donjon donjon = new Donjon(new Coord(x, y));
         LieuDao.ajouterLieu(db, donjon);
         DonjonService.remplirDonjon(donjon);
