@@ -12,8 +12,8 @@ public class GuildeService {
 
     public static Guilde creerGuilde (Connection db) {
         Random rnd = new Random();
-        int x = rnd.nextInt(20);
-        int y = rnd.nextInt(20);
+        int x = rnd.nextInt(40);
+        int y = rnd.nextInt(26);
         Guilde guilde = new Guilde(new Coord(x, y));
         int randomArgent = rnd.nextInt(10000);
         guilde.setArgent(randomArgent);
