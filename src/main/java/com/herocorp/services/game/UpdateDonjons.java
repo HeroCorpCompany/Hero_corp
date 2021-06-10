@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class UpdateDonjons {
     public static void updateDonjons ( World world ) {
         ArrayList<Donjon> listeDonjons = world.getListeDonjons();
-        if (listeDonjons.size() < 10) {
+        if (listeDonjons.size() < world.getNbDonjonSeuils()) {
             genererDonjons(world);
         }
     }

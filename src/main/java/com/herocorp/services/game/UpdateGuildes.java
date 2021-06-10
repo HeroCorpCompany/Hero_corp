@@ -13,7 +13,7 @@ public class UpdateGuildes {
     
     public static void updateGuildes ( World world ) {
         ArrayList<Guilde> listeGuildes = world.getListeGuildes();
-        if (listeGuildes.size() < 7) {
+        if (listeGuildes.size() < world.getNbGuildeSeuil()) {
             genererGuildes(world);
         }
         for (int i = 0; i < listeGuildes.size(); i++) {
