@@ -46,7 +46,7 @@ public class UpdateChasseurs {
                             // Attendre
                         } else {
                             Guilde guilde = guildeRecrute(world);
-                            if (guilde != null) {
+                            if (guilde != null && chasseur.isInGuilde() == false) {
                                 WorldService.ajouterChasseurGuilde(world, chasseur, guilde);
                             } else {
                                 GroupeRaid groupe = groupeDispo(world);

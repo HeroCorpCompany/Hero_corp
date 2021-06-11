@@ -22,9 +22,9 @@ public class World {
     private int ageChasseurMort = 30;
     private int ageChasseurClasse = 3;
     private int ageChasseurReproduction = 5;
-    private int nbGuildeSeuil = 5;
-    private int nbDonjonSeuils = 9;
-    private double chanceReproduction = 0.6;
+    private int nbGuildeSeuil = 3;
+    private int nbDonjonSeuils = 10;
+    private double chanceReproduction = 0.4;
 
 
     public World (ArrayList <Chasseur> listeChasseurs, ArrayList <Donjon> listeDonjons, ArrayList <Guilde> listeGuildes, HashMap <String, AbstractLieu> mapLieux) {

@@ -37,7 +37,7 @@ public class Game {
             Donjon donjon = DonjonService.creerDonjon(db);
             listeDonjons.add(donjon);
         }
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 90; i++) {
             Chasseur chasseur = ChasseurService.creerChasseur(db, "Chasseur " + i, forum);
             listeChasseurs.add(chasseur);
         }
@@ -54,12 +54,12 @@ public class Game {
         this.stats = new Statistiques(this.world);
     }
     public void setVariablesWorld (World world, int nbIteration){
-        world.setChanceReproduction(nbIteration*world.getChanceReproduction()/50);
+        //world.setChanceReproduction(nbIteration*world.getChanceReproduction()/50);
         world.setAgeChasseurMort((int) calcVariable(world.getAgeChasseurMort(), nbIteration));
         world.setAgeChasseurClasse((int) calcVariable(world.getAgeChasseurClasse(), nbIteration));
         world.setAgeChasseurReproduction((int) calcVariable(world.getAgeChasseurReproduction(), nbIteration));
-        world.setNbDonjonSeuils((int) calcVariable(world.getNbDonjonSeuils(), nbIteration));
-        world.setNbGuildeSeuil((int) calcVariable(world.getNbGuildeSeuil(), nbIteration));
+        //world.setNbDonjonSeuils((int) calcVariable(world.getNbDonjonSeuils(), nbIteration));
+        //world.setNbGuildeSeuil((int) calcVariable(world.getNbGuildeSeuil(), nbIteration));
     }
     public double calcVariable(int initialNumber, int nbIteration){
         return nbIteration*initialNumber/50;

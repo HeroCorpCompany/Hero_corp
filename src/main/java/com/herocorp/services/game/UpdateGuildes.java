@@ -3,13 +3,14 @@ package com.herocorp.services.game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.herocorp.dao.ChasseurDao;
 import com.herocorp.dao.GuildeDao;
 import com.herocorp.game.World;
 import com.herocorp.metier.acteurs.AbstractActeur;
 import com.herocorp.metier.acteurs.Chasseur;
 import com.herocorp.metier.lieux.Guilde;
+import com.herocorp.services.metier.acteurs.ChasseurService;
 import com.herocorp.services.metier.lieux.GuildeService;
-import com.herocorp.tools.Classe;
 
 public class UpdateGuildes {
     
@@ -21,6 +22,14 @@ public class UpdateGuildes {
         for (int i = 0; i < listeGuildes.size(); i++) {
             Guilde guilde = listeGuildes.get(i);
             if (guilde.getArgent() < 0) {
+                System.out.println("Suppression de la guilde " + guilde.getId());
+                for (int j = 0; j < guilde.getMembres().getTaille(); j++) {
+                    Chasseur chasseur = (Chasseur) guilde.getMembres().get(j);
+                    if (chasseur.getPosition() == guilde) {
+                        ChasseurService.changerLieu(chasseur, world.getLieu("Forum"));
+                        ChasseurDao.majChasseur(world.getDb(), chasseur);
+                    }
+                }
                 WorldService.detruireGuilde(world, guilde);
                 i--;
             }
@@ -38,7 +47,7 @@ public class UpdateGuildes {
     }
 
     public static void recrutement ( World world, Guilde guilde ) {
-        if (guilde.getArgent() - (GuildeService.montantAPayer(guilde) + Classe.S.getSalaire()) >= 0) {
+        if (guilde.getArgent() - (GuildeService.montantAPayer(guilde)) >= 0) {
             guilde.setRecrute(true);
         }
         else {
@@ -49,7 +58,7 @@ public class UpdateGuildes {
 
     public static void genererGuildes (World world) {
         Random r = new Random();
-        int newGuilde = r.nextInt(6); 
+        int newGuilde = r.nextInt(world.getNbGuildeSeuil() - world.getListeGuildes().size()); 
         for (int i = 0; i < newGuilde; i++){
             Guilde guilde = GuildeService.creerGuilde(world.getDb());
             world.ajouterGuilde(guilde);

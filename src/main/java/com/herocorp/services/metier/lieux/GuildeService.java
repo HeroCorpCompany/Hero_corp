@@ -17,7 +17,7 @@ public class GuildeService {
         int y = rnd.nextInt(24);
         Guilde guilde = new Guilde(new Coord(x, y));
         int randomArgent = rnd.nextInt(3000);
-        guilde.setArgent(randomArgent);
+        guilde.setArgent(randomArgent + 10000);
         LieuDao.ajouterLieu(db, guilde);
         GuildeDao.ajouterGuilde(db, guilde);
         return guilde;
